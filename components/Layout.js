@@ -4,15 +4,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const ourGray = '#1d2d35';
-const lightGray = '#f5f5f5';
-const ourRed = '#8e0b0b';
+const lightGray = '#E9E4E4';
+const ourOrange = '#FFA500';
 const footerGray = '#171727';
 
 const headerStyles = css`
   background: ${lightGray};
   color: ${ourGray};
-  border: 1px solid #ddd;
-  border-radius: 5px;
   padding: 8px;
 
   div {
@@ -51,21 +49,8 @@ const headerDiv2 = css`
     border-bottom: 2px solid transparent;
     font-family: 'PT Sans', 'Helvetica', 'Arial', sans-serif;
 
-    :nth-child(4) {
-      background-color: ${ourRed};
-      border-radius: 50%;
-      color: ${lightGray};
-      margin: 35px 0 0 0;
-      padding: 5px;
-      font-size: 0.4rem;
-      border: none;
-      position: relative;
-      right: 30px;
-      top: -30px;
-    }
-
     :hover {
-      border-bottom: 2px solid ${ourRed};
+      border-bottom: 2px solid ${ourOrange};
     }
   }
 `;

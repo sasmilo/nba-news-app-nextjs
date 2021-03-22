@@ -9,8 +9,9 @@ export default async function getNewsFromLastTwoDays() {
       q: 'nba',
       domains:
         'nba.com,espn.com,bleacherreport.com,basketball.realgm.com,foxsports.com,news.google.com,spox.com',
-      from: '2021-03-15',
-      to: '2021-03-17',
+      // from: '2021-03-16',
+      // to: '2021-03-22',
+      language: 'en',
       sortBy: 'publishedAt',
     },
     headers: {
@@ -22,7 +23,7 @@ export default async function getNewsFromLastTwoDays() {
   const newsDataArray = await axios
     .request(options)
     .then(function (response) {
-      console.log(response.data);
+      // console.log(response.data);
       const newsArray = response.data.articles;
       return newsArray;
     })
