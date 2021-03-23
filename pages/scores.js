@@ -5,8 +5,9 @@ import { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Layout from '../components/Layout';
-import { setDateCookieClientSide } from '../components/setDateCookie';
-import getChosenScores from './api/scoreonwantedday';
+import GetLastNightScores from './api/yesterdayscores';
+
+const axios = require('axios');
 
 const ourGray = '#1d2d35';
 const lightGray = '#E9E4E4';
@@ -57,19 +58,9 @@ const paragraphStyles = css`
 `;
 
 export default function Scores(props) {
-  const yesterday = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24)
-    .toISOString()
-    .slice(0, 10);
+  const [scores, setScores] = useState(props.yestScoresArray);
 
-  // const yesterdayWithoutDashes = yesterday.replaceAll('-', '');
-  // console.log(props.newsArray);
-  getChosenScores();
-  // console.log(props.scoresArray[0].vTeam.triCode);
-  const [date, setDate] = useState(yesterday);
-
-  console.log(date);
-
-  const [scores, setScores] = useState(props.scoresArray);
+  // console.log(scores);
 
   const responsive = {
     superLargeDesktop: {
@@ -111,34 +102,24 @@ export default function Scores(props) {
             type="date"
             onChange={(e) => {
               const newDate = e.target.value;
-              setDateCookieClientSide(newDate);
-              setDate(newDate);
+              const newDateWithoutDashes = newDate.replaceAll('-', '');
 
-              // const url = '/api/scoreonwantedday';
-              // const fetchData = {
-              //   method: 'POST',
-              //   body: date,
-              //   headers: new Headers(),
-              // };
-
-              // fetch(url, fetchData).then(function () {
-              //   console.log();
-              //   // Handle response you get from the server
-              // });
-
-              // axios.post( {
-              //   method: 'post',
-              //   url: './api/scoresonwantedday',
-              //   options:{
-              //   date = 'newDate',
-              //   }
-              // })
-              // .then(function (response) {
-              //   console.log(response);
-              // })
-              // .catch(function (error) {
-              //   console.log(error);
-              // });
+              const options = {
+                method: 'GET',
+                url: `http://data.nba.net/10s/prod/v2/${newDateWithoutDashes}/scoreboard.json`,
+                params: {},
+                headers: {},
+              };
+              axios
+                .request(options)
+                .then(function (response) {
+                  const scoresArray = response.data.games;
+                  console.log(scoresArray);
+                  return setScores(scoresArray);
+                })
+                .catch(function (error) {
+                  console.error(error);
+                });
             }}
           />
         </p>
@@ -187,10 +168,10 @@ export default function Scores(props) {
 }
 
 export async function getServerSideProps() {
-  const scoresArray = await getChosenScores();
+  const yestScoresArray = await GetLastNightScores();
   return {
     props: {
-      scoresArray: scoresArray || [],
+      yestScoresArray: yestScoresArray || [],
     },
   };
 }
