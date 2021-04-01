@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import Layout from '../components/Layout';
+import { setDateCookieClientSide } from '../util/cookies';
 import GetLastNightScores from './api/yesterdayscores';
 
 const axios = require('axios');
@@ -103,6 +104,8 @@ export default function Scores(props) {
             onChange={(e) => {
               const newDate = e.target.value;
               const newDateWithoutDashes = newDate.replaceAll('-', '');
+              setDateCookieClientSide(newDateWithoutDashes);
+              // localStorage.setItem('gamedate', `${newDateWithoutDashes}`);
 
               const options = {
                 method: 'GET',
@@ -114,7 +117,7 @@ export default function Scores(props) {
                 .request(options)
                 .then(function (response) {
                   const scoresArray = response.data.games;
-                  console.log(scoresArray);
+                  // console.log(scoresArray);
                   return setScores(scoresArray);
                 })
                 .catch(function (error) {
@@ -128,8 +131,8 @@ export default function Scores(props) {
           <ul>
             <Carousel responsive={responsive} ssr={true} infinite={true}>
               {scores.map((game) => (
-                <li key={game}>
-                  <Link href="/">
+                <li key={game.gameId}>
+                  <Link href={`/${game.gameId}`}>
                     <a>
                       {/* <Image
                     src={game.urlToImage}
@@ -137,6 +140,10 @@ export default function Scores(props) {
                     width={100}
                     height={100}
                   /> */}
+                      <br />
+                      {'  '}
+                      {'  '}
+                      {game.gameId}
                       <br />
                       {'  '}
                       {'  '}

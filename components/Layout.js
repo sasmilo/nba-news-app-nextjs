@@ -2,6 +2,8 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import Router from 'next/router';
+import { setSearchCookieClientSide } from '../util/cookies';
 
 const ourGray = '#1d2d35';
 const lightGray = '#E9E4E4';
@@ -55,6 +57,15 @@ const headerDiv2 = css`
   }
 `;
 
+const searchStyles = css`
+  border: none;
+  border-radius: 10px;
+  font-family: 'PT Sans', 'Helvetica', 'Arial', sans-serif;
+  font-size: 0.6rem;
+  padding: 0;
+  margin-bottom: 15px;
+`;
+
 const navStyles = css`
   display: flex;
   justify-content: space-between;
@@ -96,6 +107,10 @@ const bodyStyles = css`
 `;
 
 export default function Layout(props) {
+  // function handleClick() {
+  // const searchValue = this.
+  // }
+
   return (
     <>
       <Head>
@@ -126,6 +141,19 @@ export default function Layout(props) {
             <Link href="/teams">
               <a>Teams</a>
             </Link>
+            <input
+              css={searchStyles}
+              type="search"
+              placeholder="Search the news"
+              onChange={(e) => {
+                const newSearch = e.target.value;
+                setSearchCookieClientSide(newSearch);
+
+                if (newSearch !== '') {
+                  Router.push('/search');
+                }
+              }}
+            />
           </div>
         </nav>
       </header>

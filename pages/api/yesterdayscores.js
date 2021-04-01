@@ -7,12 +7,6 @@ export default async function GetLastNightScores() {
 
   const yesterdayWithoutDashes = yesterday.replaceAll('-', '');
 
-  // console.log(yesterdayWithoutDashes);
-
-  // console.log(yesterday);
-
-  // const [date, setDate] = useState(yesterdayWithoutDashes);
-
   const options = {
     method: 'GET',
     url: `http://data.nba.net/10s/prod/v1/${yesterdayWithoutDashes}/scoreboard.json`,

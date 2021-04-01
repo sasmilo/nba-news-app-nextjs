@@ -14,12 +14,6 @@ const lightGray = '#E9E4E4';
 const newsStyles = css`
   color: ${ourGray};
   text-decoration: none;
-  font-size: 0.82rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  line-height: 1;
-  font-family: 'PT Sans', 'Helvetica', 'Arial', sans-serif;
-  display: flex;
 
   ul {
     list-style-type: none;
@@ -39,6 +33,18 @@ const newsStyles = css`
     padding: 10px;
     align-self: stretch;
     margin-bottom: 10px;
+  }
+
+  h4 {
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1;
+    font-family: 'PT Sans', 'Helvetica', 'Arial', sans-serif;
+    /* display: flex; */
+    text-align: left;
+    padding-bottom: 15px;
+    margin: 0;
   }
 
   p {
@@ -93,6 +99,15 @@ const scoresStyles = css`
   li + li {
     margin-left: 20px;
   }
+
+  div + div {
+    padding-left: 10 px;
+  }
+`;
+
+const newsFieldStyles = css`
+  display: grid;
+  grid-template-columns: 1fr 8fr;
 `;
 
 export default function Home(props) {
@@ -139,7 +154,7 @@ export default function Home(props) {
               <Carousel responsive={responsive} ssr={true} infinite={true}>
                 {props.scoresArray.map((scores) => (
                   <li key={scores}>
-                    <Link href="/">
+                    <Link href={`/${scores.gameId}`}>
                       <a>
                         {/* <Image
                           src={scores.urlToImage}
@@ -180,20 +195,23 @@ export default function Home(props) {
               <li key={news}>
                 <Link href={news.url}>
                   <a>
-                    <Image
-                      src={news.urlToImage}
-                      alt="Image"
-                      width={130}
-                      height={100}
-                    />
-                    {/* <br /> */}
-                    {'  '}
-                    {'  '}
-                    {news.title}
-                    {/* <br /> */}
-                    {'  '}
-                    {'  '}
-                    <p> {news.description}</p>
+                    <div css={newsFieldStyles}>
+                      <div>
+                        <Image
+                          src={news.urlToImage}
+                          alt="Image"
+                          width={130}
+                          height={100}
+                        />
+                      </div>
+                      <div>
+                        <h4>{news.title}</h4>
+                        {/* <br /> */}
+                        {'  '}
+                        {'  '}
+                        <p> {news.description}</p>
+                      </div>
+                    </div>
                   </a>
                 </Link>
               </li>
@@ -210,8 +228,8 @@ export async function getServerSideProps() {
   const scoresArray = await getLastNightScores();
   return {
     props: {
-      newsArray: newsArray,
-      scoresArray: scoresArray,
+      newsArray: newsArray || [],
+      scoresArray: scoresArray || [],
     },
   };
 }
