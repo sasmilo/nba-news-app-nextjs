@@ -153,7 +153,7 @@ export async function getServerSideProps(context) {
   // console.log(context);
   const gameId = String(context.query.gameId);
   const gameDate = String(context.req.cookies.gamedate);
-  console.log(gameDate);
+  // console.log(gameDate);
   return {
     props: {
       gameId: gameId,

@@ -76,7 +76,7 @@ const scoresStyles = css`
     display: flex;
     justify-content: space-evenly;
     list-style-type: none;
-    padding: 40px;
+    padding: 20px 40px;
     background-color: ${lightGray};
     width: 100%;
   }
@@ -151,7 +151,7 @@ export default function Home(props) {
         <div>
           <div css={scoresStyles}>
             <ul>
-              <Carousel responsive={responsive} ssr={true} infinite={true}>
+              <Carousel responsive={responsive} ssr={true} infinite={false}>
                 {props.scoresArray.map((scores) => (
                   <li key={scores}>
                     <Link href={`/${scores.gameId}`}>

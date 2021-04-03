@@ -30,6 +30,7 @@ const headerDiv1 = css`
 `;
 
 const headerDiv2 = css`
+  margin-top: 10px;
   padding-top: 8px;
   padding-right: 28px;
   align-items: right;
@@ -63,7 +64,7 @@ const searchStyles = css`
   font-family: 'PT Sans', 'Helvetica', 'Arial', sans-serif;
   font-size: 0.6rem;
   padding: 0;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 `;
 
 const navStyles = css`

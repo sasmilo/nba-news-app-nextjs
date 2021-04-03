@@ -12,6 +12,8 @@ module.exports = {
       'a4.espncdn.com',
       'a2.espncdn.com',
       'a57.foxsports.com',
+      'media.bleacherreport.com',
+      'cdn.nba.com',
       // 'www.basketball.realgm.com',
       // 'www.foxsports.com',
       // 'www.news.google.com',

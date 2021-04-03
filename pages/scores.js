@@ -129,7 +129,7 @@ export default function Scores(props) {
 
         <div css={scoresStyles}>
           <ul>
-            <Carousel responsive={responsive} ssr={true} infinite={true}>
+            <Carousel responsive={responsive} ssr={true} infinite={false}>
               {scores.map((game) => (
                 <li key={game.gameId}>
                   <Link href={`/${game.gameId}`}>
