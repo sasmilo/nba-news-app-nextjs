@@ -63,8 +63,8 @@ const searchStyles = css`
   border-radius: 10px;
   font-family: 'PT Sans', 'Helvetica', 'Arial', sans-serif;
   font-size: 0.6rem;
-  padding: 0;
-  margin-bottom: 10px;
+  padding: 0 15px;
+  margin: 10px 30px;
 `;
 
 const navStyles = css`
@@ -107,10 +107,26 @@ const bodyStyles = css`
   }
 `;
 
+const loginStyles = css`
+  padding-top: 25px;
+
+  a {
+    font-family: 'Source Sans Pro Regular', 'PT Sans', 'Helvetica', 'Arial',
+      sans-serif;
+    font-size: 0.7rem;
+    text-decoration: none;
+    color: ${ourGray};
+
+    :hover {
+      transform: scale(1.05);
+      transition: all 0.2s ease-in-out;
+      font-weight: bold;
+    }
+  }
+`;
+
 export default function Layout(props) {
-  // function handleClick() {
-  // const searchValue = this.
-  // }
+  // const userId = props.user.userId;
 
   return (
     <>
@@ -142,6 +158,8 @@ export default function Layout(props) {
             <Link href="/teams">
               <a>Teams</a>
             </Link>
+          </div>
+          <div>
             <input
               css={searchStyles}
               type="search"
@@ -151,13 +169,45 @@ export default function Layout(props) {
                 setSearchCookieClientSide(newSearch);
 
                 if (newSearch !== '') {
-                  Router.push('/search');
+                  Router.push(`/search/?=${newSearch}`);
                 }
               }}
             />
           </div>
+
+          <div>
+            <div css={loginStyles}>
+              {!props.isSessionValid ? (
+                <>
+                  <Link href="/register">
+                    <a data-cy="header-register">Register</a>
+                  </Link>
+                  <Link href="/login">
+                    <a data-cy="header-login">Login</a>
+                  </Link>
+                </>
+              ) : (
+                <div>
+                  {/* <Link href={`/profile/${userId}`}>
+              <a>
+                <Image
+                  src="/account3.svg"
+                  alt="account icon"
+                  width={40}
+                  height={40}
+                />
+              </a>
+            </Link> */}
+                  <Link href="/logout">
+                    <a data-cy="header-logout">Logout</a>
+                  </Link>
+                </div>
+              )}
+            </div>
+          </div>
         </nav>
       </header>
+
       <div css={bodyStyles}>{props.children}</div>
       <footer css={footerStyles}>
         <p>

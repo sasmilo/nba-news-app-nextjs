@@ -1,7 +1,7 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import Layout from '../components/Layout';
 
 const axios = require('axios');
 const paddBott = '20px';
@@ -79,6 +79,7 @@ const teamsParentStyles = css`
 
 const teamsStyles = css`
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding-bottom: ${paddBott};
@@ -118,7 +119,7 @@ export default function BoxScore(props) {
   if (!boxscore) return <div>Getting ready...</div>;
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>Box score</title>
       </Head>
@@ -135,17 +136,31 @@ export default function BoxScore(props) {
       </div>
       <div css={teamsParentStyles}>
         <div css={teamsStyles}>
+          <Image
+            src={`/${boxscore.vTeam.triCode}.png`}
+            alt="Image"
+            width={100}
+            height={100}
+          />
+          <br />
           {boxscore.vTeam.triCode}
           {'    '}
           {boxscore.vTeam.score}
         </div>
         <div css={teamsStyles}>
+          <Image
+            src={`/${boxscore.hTeam.triCode}.png`}
+            alt="Image"
+            width={100}
+            height={100}
+          />
+          <br />
           {boxscore.hTeam.triCode}
           {'    '}
           {boxscore.hTeam.score}
         </div>
       </div>
-    </Layout>
+    </>
   );
 }
 

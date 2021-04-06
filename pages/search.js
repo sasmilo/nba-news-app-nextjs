@@ -2,7 +2,6 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import Layout from '../components/Layout';
 import getNewsFromLastTwoDays from './api/news';
 import GetLastNightScores from './api/yesterdayscores';
 
@@ -91,7 +90,7 @@ export default function SearchPage(props) {
   }
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>NBA News Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -103,12 +102,12 @@ export default function SearchPage(props) {
           <ul>
             {filteredNews.map((news) => (
               <li key={news}>
-                <Link href={news.url}>
+                <Link href={news.link}>
                   <a>
                     <div css={newsFieldStyles}>
                       <div>
                         <Image
-                          src={news.urlToImage}
+                          src={news.media}
                           alt="Image"
                           width={130}
                           height={100}
@@ -119,7 +118,7 @@ export default function SearchPage(props) {
                         {/* <br /> */}
                         {'  '}
                         {'  '}
-                        <p> {news.description}</p>
+                        <p> {news.summary}</p>
                       </div>
                     </div>
                   </a>
@@ -129,7 +128,7 @@ export default function SearchPage(props) {
           </ul>
         </div>
       </main>
-    </Layout>
+    </>
   );
 }
 

@@ -48,6 +48,6 @@ exports.up = async (sql) => {
 exports.down = async (sql) => {
   await sql`
 	DELETE FROM teams WHERE
-	nba_url_code
+	nba_url_code = 'rockets'
 	`;
 };

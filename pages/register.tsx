@@ -1,14 +1,13 @@
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 
 type Props = {
   csrfToken: string;
-  setIsSessionStateStale: Dispatch<SetStateAction<boolean>>;
 };
 
-export default function Login(props: Props) {
+export default function Register(props: Props) {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<Error[]>([]);
@@ -17,14 +16,14 @@ export default function Login(props: Props) {
   return (
     <>
       <Head>
-        <title>Login</title>
+        <title>Register</title>
       </Head>
 
       <form
         onSubmit={async (event) => {
           event.preventDefault();
 
-          const response = await fetch('/api/login', {
+          const response = await fetch('/api/register', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -47,26 +46,27 @@ export default function Login(props: Props) {
             ? router.query.returnTo[0]
             : router.query.returnTo;
 
-          router.push(returnTo || `/profile/${user.userId}`);
-          props.setIsSessionStateStale(true);
+          router.push(returnTo || '/login');
+          // router.push(returnTo || `/profile/${user.userId}`);
         }}
       >
         <label>
-          username:
+          Username:
           <input
             value={username}
             onChange={(event) => setUsername(event.currentTarget.value)}
           />
         </label>
+        <br />
         <label>
-          password:
+          Password:
           <input
             type="password"
             value={password}
             onChange={(event) => setPassword(event.currentTarget.value)}
           />
         </label>
-        <button type="submit">login</button>
+        <button type="submit">Register</button>
       </form>
 
       {errors.map((error) => (
@@ -102,7 +102,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   let session = await getSessionByToken(context.req.cookies.session);
 
   // If the user already has a valid session cookie,
-  // don't allow visiting the login page
+  // don't allow visiting the register page
   if (session?.userId) {
     return {
       redirect: {

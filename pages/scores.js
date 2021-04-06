@@ -1,10 +1,10 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import Layout from '../components/Layout';
 import { setDateCookieClientSide } from '../util/cookies';
 import GetLastNightScores from './api/yesterdayscores';
 
@@ -88,7 +88,7 @@ export default function Scores(props) {
   };
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>NBA News Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -134,32 +134,38 @@ export default function Scores(props) {
                 <li key={game.gameId}>
                   <Link href={`/${game.gameId}`}>
                     <a>
-                      {/* <Image
-                    src={game.urlToImage}
-                    alt="Image"
-                    width={100}
-                    height={100}
-                  /> */}
-                      <br />
+                      {/* <br />
                       {'  '}
                       {'  '}
-                      {game.gameId}
+                      {game.gameId} */}
                       <br />
+                      <Image
+                        src={`/${game.vTeam.triCode}.png`}
+                        alt="Image"
+                        width={25}
+                        height={25}
+                      />
                       {'  '}
                       {'  '}
                       {game.vTeam.triCode}
                       {'  '}
-                      {'  '}-{'  '}
-                      {'  '}
-                      {game.hTeam.triCode}
-                      <br />
-                      <br />
-                      {'  '}
                       {'  '}
                       {'  '}
                       {game.vTeam.score}
+                      <br />
+                      <br />
+                      <Image
+                        src={`/${game.hTeam.triCode}.png`}
+                        alt="Image"
+                        width={25}
+                        height={25}
+                      />
                       {'  '}
-                      {'  '}-{'  '}
+                      {'  '}
+                      {'  '}
+                      {game.hTeam.triCode}
+                      {'  '}
+                      {'  '}
                       {'  '}
                       {game.hTeam.score}
                     </a>
@@ -170,7 +176,7 @@ export default function Scores(props) {
           </ul>
         </div>
       </main>
-    </Layout>
+    </>
   );
 }
 

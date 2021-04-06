@@ -4,7 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import Layout from '../components/Layout';
 import getNewsFromLastTwoDays from './api/news';
 import getLastNightScores from './api/yesterdayscores';
 
@@ -71,6 +70,7 @@ const scoresStyles = css`
   font-family: 'PT Sans', 'Helvetica', 'Arial', sans-serif;
   display: flex;
   flex-flow: row wrap;
+  width: 100%;
 
   ul {
     display: flex;
@@ -78,7 +78,7 @@ const scoresStyles = css`
     list-style-type: none;
     padding: 20px 40px;
     background-color: ${lightGray};
-    width: 100%;
+    width: 95%;
   }
 
   a {
@@ -108,6 +108,10 @@ const scoresStyles = css`
 const newsFieldStyles = css`
   display: grid;
   grid-template-columns: 1fr 8fr;
+`;
+
+const newsTextStyles = css`
+  padding-left: 20 px;
 `;
 
 export default function Home(props) {
@@ -140,7 +144,7 @@ export default function Home(props) {
   };
 
   return (
-    <Layout>
+    <>
       <Head>
         <title>NBA News Next App</title>
         <link rel="icon" href="/favicon.ico" />
@@ -163,21 +167,33 @@ export default function Home(props) {
                           height={100}
                         /> */}
                         <br />
+                        <Image
+                          src={`/${scores.vTeam.triCode}.png`}
+                          alt="Image"
+                          width={25}
+                          height={25}
+                        />
                         {'  '}
                         {'  '}
                         {scores.vTeam.triCode}
                         {'  '}
-                        {'  '}-{'  '}
-                        {'  '}
-                        {scores.hTeam.triCode}
-                        <br />
-                        <br />
-                        {'  '}
                         {'  '}
                         {'  '}
                         {scores.vTeam.score}
+                        <br />
+                        <br />
+                        <Image
+                          src={`/${scores.hTeam.triCode}.png`}
+                          alt="Image"
+                          width={25}
+                          height={25}
+                        />
                         {'  '}
-                        {'  '}-{'  '}
+                        {'  '}
+                        {'  '}
+                        {scores.hTeam.triCode}
+                        {'  '}
+                        {'  '}
                         {'  '}
                         {scores.hTeam.score}
                       </a>
@@ -193,23 +209,23 @@ export default function Home(props) {
           <ul>
             {props.newsArray.map((news) => (
               <li key={news}>
-                <Link href={news.url}>
+                <Link href={news.link}>
                   <a>
                     <div css={newsFieldStyles}>
                       <div>
                         <Image
-                          src={news.urlToImage}
+                          src={news.media}
                           alt="Image"
                           width={130}
                           height={100}
                         />
                       </div>
-                      <div>
+                      <div css={newsTextStyles}>
                         <h4>{news.title}</h4>
                         {/* <br /> */}
                         {'  '}
                         {'  '}
-                        <p> {news.description}</p>
+                        <p> {news.summary}</p>
                       </div>
                     </div>
                   </a>
@@ -219,7 +235,7 @@ export default function Home(props) {
           </ul>
         </div>
       </main>
-    </Layout>
+    </>
   );
 }
 

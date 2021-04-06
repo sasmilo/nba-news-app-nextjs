@@ -1,6 +1,5 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
-import Layout from '../components/Layout';
 import getStandings from './api/standings';
 
 const standingsStyles = css`
@@ -19,7 +18,7 @@ export default function Standings(props) {
   // console.log(props.newsArray);
   getStandings();
   return (
-    <Layout>
+    <>
       <Head>
         <title>NBA Standings</title>
         <link rel="icon" href="/favicon.ico" />
@@ -118,7 +117,7 @@ export default function Standings(props) {
           </div>
         </div>
       </main>
-    </Layout>
+    </>
   );
 }
 
