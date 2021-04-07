@@ -181,3 +181,38 @@ export async function createUser(username, passwordHash) {
   `;
   return camelcaseRecords(users)[0];
 }
+
+export async function createUserTeamPair(userId, teamId) {
+  const userTeam = await sql`
+    INSERT INTO users_teams
+      (user_id, team_id)
+    VALUES
+      (${userId}, ${teamId})
+    RETURNING user_id, team_id
+  `;
+  return camelcaseRecords(userTeam)[0];
+}
+
+export async function getUsersFavTeams(userId) {
+  const userFavTeams = await sql`
+    SELECT
+      *
+    FROM
+      users_teams
+    WHERE
+      user_id = ${userId}
+  `;
+  // console.log(userFavTeams);
+  return camelcaseRecords(userFavTeams);
+}
+
+export async function deleteUserTeamPair(userId, teamId) {
+  const usersTeams = await sql`
+    DELETE FROM
+      users_teams
+    WHERE
+    user_id = ${userId} AND team_id = ${teamId}
+    RETURNING *
+  `;
+  return camelcaseRecords(usersTeams);
+}

@@ -61,7 +61,7 @@ const newsStyles = css`
 `;
 
 const scoresStyles = css`
-  color: ${ourGray};
+  color: ${lightGray};
   text-decoration: none;
   font-size: 0.82rem;
   font-weight: 700;
@@ -77,7 +77,7 @@ const scoresStyles = css`
     justify-content: space-evenly;
     list-style-type: none;
     padding: 20px 40px;
-    background-color: ${lightGray};
+    background-color: ${ourGray};
     width: 95%;
   }
 

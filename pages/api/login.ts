@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   doesCsrfTokenMatchSessionToken,
-  doesPasswordMatchPasswordHash
+  doesPasswordMatchPasswordHash,
 } from '../../util/auth';
 import { serializeSecureCookieServerSide } from '../../util/cookies';
 import {
   createSessionByUserId,
-  getUserWithHashedPasswordByUsername
+  getUserWithHashedPasswordByUsername,
 } from '../../util/database';
 
 export default async function handler(

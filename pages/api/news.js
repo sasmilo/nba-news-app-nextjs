@@ -1,10 +1,21 @@
 export default async function getNewsFromLastTwoDays() {
+  // const user = await getUserById(context.query.userId);
+  // const teams = await getTeams();
+  // const favoriteTeams = await getUsersFavTeams(user.userId);
+
   const axios = require('axios').default;
+
+  // {!props.isSessionValid ? (
+  //   searchTerm = 'nba news' ) : (
+
+  //     searchTerm =
+
+  //    )}
 
   const options = {
     method: 'GET',
     url: 'https://free-news.p.rapidapi.com/v1/search',
-    params: { q: 'nba', lang: 'en' },
+    params: { q: 'nba news', lang: 'en' },
     headers: {
       'x-rapidapi-key': '1059d1e8fcmshfbea3f707e923ffp11cf21jsnf22363d410bc',
       'x-rapidapi-host': 'free-news.p.rapidapi.com',

@@ -6,7 +6,8 @@ exports.up = async (sql) => {
 		nba_url_code VARCHAR(50),
 		conference VARCHAR(50),
 		division VARCHAR(50),
-		city VARCHAR(50)
+		city VARCHAR(50),
+		nba_tricode VARCHAR(5)
 	)
 	`;
 };
