@@ -2,8 +2,8 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import getNewsFromLastTwoDays from './api/news';
-import GetLastNightScores from './api/yesterdayscores';
+import GetLastNightScores from '../components/yesterdayscores';
+import getNewsFromLastTwoDays from './news';
 
 const ourGray = '#1d2d35';
 const lightGray = '#E9E4E4';

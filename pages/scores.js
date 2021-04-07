@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import GetLastNightScores from '../components/yesterdayscores';
 import { setDateCookieClientSide } from '../util/cookies';
-import GetLastNightScores from './api/yesterdayscores';
 
 const axios = require('axios');
 

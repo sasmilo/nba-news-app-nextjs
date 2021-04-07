@@ -4,8 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import getNewsFromLastTwoDays from './api/news';
-import getLastNightScores from './api/yesterdayscores';
+import getLastNightScores from '../components/yesterdayscores';
+import getGeneralNewsFromLastTwoDays from './news';
+import getPersonalizedNewsFromLastTwoDays from './personalizednews';
 
 const ourGray = '#1d2d35';
 const lightGray = '#E9E4E4';
@@ -239,13 +240,45 @@ export default function Home(props) {
   );
 }
 
-export async function getServerSideProps() {
-  const newsArray = await getNewsFromLastTwoDays();
+export async function getServerSideProps(context) {
+  const {
+    getUserById,
+    getSessionByToken,
+    getUsersFavTeams,
+    getUserByToken,
+  } = await import('../util/database');
+
   const scoresArray = await getLastNightScores();
-  return {
-    props: {
-      newsArray: newsArray || [],
-      scoresArray: scoresArray || [],
-    },
-  };
+
+  const session = await getSessionByToken(context.req.cookies.session);
+
+  const user = await getUserByToken(session);
+
+  if (!session || session.userId !== user.userId || user === 'undefined') {
+    const newsArray = await getGeneralNewsFromLastTwoDays();
+    return {
+      props: {
+        newsArray: newsArray || [],
+        scoresArray: scoresArray || [],
+      },
+    };
+  } else {
+    // const user = await getUserById(context.query.userId);
+    const favoriteTeamsArray = await getUsersFavTeams(user.userId);
+    // console.log(favoriteTeamsArray);
+
+    const favTeams = favoriteTeamsArray.map((team) => team.teamName);
+    const favTeamsInOneString = favTeams.join();
+    const queryString = favTeamsInOneString.replace(',', ' ');
+    console.log(queryString);
+
+    const newsArray = await getPersonalizedNewsFromLastTwoDays(queryString);
+
+    return {
+      props: {
+        newsArray: newsArray || [],
+        scoresArray: scoresArray || [],
+      },
+    };
+  }
 }

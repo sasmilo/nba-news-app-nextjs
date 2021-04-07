@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 import Head from 'next/head';
-import getStandings from './api/standings';
+import getStandings from '../components/standings';
 
 const standingsStyles = css`
   display: grid;

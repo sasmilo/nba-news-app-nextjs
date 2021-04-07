@@ -140,7 +140,7 @@ export default function Profile(props: Props) {
                   type="checkbox"
                   onClick={async () => {
                     const teamIdNr = team.teamId;
-                    const response = await fetch('/api/preferences', {
+                    const response = await fetch('/api/create-user-team', {
                       method: 'POST',
                       headers: {
                         'Content-Type': 'application/json',

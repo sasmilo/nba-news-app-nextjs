@@ -1,7 +1,10 @@
-export default async function getNewsFromLastTwoDays() {
-  // const user = await getUserById(context.query.userId);
+export default async function getGeneralNewsFromLastTwoDays() {
+
+
+  // const user = props.user;
   // const teams = await getTeams();
-  // const favoriteTeams = await getUsersFavTeams(user.userId);
+  // const favoriteTeams = props.favoriteTeams;
+  // console.log(favoriteTeams);
 
   const axios = require('axios').default;
 
@@ -48,7 +51,7 @@ export default async function getNewsFromLastTwoDays() {
 
       return newsArray;
     })
-    .catch(function (error) {
+    .catch(function (error: Error) {
       console.error(error);
     });
   return newsDataArray;
