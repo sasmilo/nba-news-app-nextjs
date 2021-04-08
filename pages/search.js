@@ -3,7 +3,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import GetLastNightScores from '../components/yesterdayscores';
-import getNewsFromLastTwoDays from './news';
+import getGeneralNewsFromLastTwoDays from './news';
+import getPersonalizedNewsFromLastTwoDays from './personalizednews';
 
 const ourGray = '#1d2d35';
 const lightGray = '#E9E4E4';
@@ -133,14 +134,49 @@ export default function SearchPage(props) {
 }
 
 export async function getServerSideProps(context) {
-  const newsArray = await getNewsFromLastTwoDays();
+  const { getSessionByToken, getUsersFavTeams, getUserByToken } = await import(
+    '../util/database'
+  );
+
   const scoresArray = await GetLastNightScores();
   const searchString = String(context.req.cookies.search);
-  return {
-    props: {
-      newsArray: newsArray || [],
-      scoresArray: scoresArray || [],
-      searchString: searchString,
-    },
-  };
+
+  const session = await getSessionByToken(context.req.cookies.session);
+
+  const user = await getUserByToken(session);
+
+  if (!session || session.userId !== user.userId || user === 'undefined') {
+    const newsArray = await getGeneralNewsFromLastTwoDays();
+    return {
+      props: {
+        newsArray: newsArray || [],
+        scoresArray: scoresArray || [],
+        searchString: searchString,
+      },
+    };
+  } else {
+    const favoriteTeamsArray = await getUsersFavTeams(user.userId);
+
+    const favTeams = favoriteTeamsArray.map((team) => team.teamName);
+    const favTeamsInOneString = favTeams.join();
+    const queryString = favTeamsInOneString.replace(',', ' ');
+
+    const newsArray = await getPersonalizedNewsFromLastTwoDays(queryString);
+
+    return {
+      props: {
+        newsArray: newsArray || [],
+        scoresArray: scoresArray || [],
+        searchString: searchString,
+      },
+    };
+  }
+
+  // return {
+  //   props: {
+  //     newsArray: newsArray || [],
+  //     scoresArray: scoresArray || [],
+  //     searchString: searchString,
+  //   },
+  // };
 }

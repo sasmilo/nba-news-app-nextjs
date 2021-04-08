@@ -164,14 +164,14 @@ export default function Layout(props) {
               css={searchStyles}
               type="search"
               placeholder="Search the news"
-              onChange={(e) => {
-                const newSearch = e.target.value;
-                setSearchCookieClientSide(newSearch);
-
-                if (newSearch !== '') {
+              onKeyDown={(event) => {
+                const newSearch = event.target.value;
+                if (event.key === 'Enter') {
+                  setSearchCookieClientSide(newSearch);
                   Router.push(`/search/?=${newSearch}`);
                 }
               }}
+              // setSearchCookieClientSide(newSearch);
             />
           </div>
 

@@ -241,12 +241,9 @@ export default function Home(props) {
 }
 
 export async function getServerSideProps(context) {
-  const {
-    getUserById,
-    getSessionByToken,
-    getUsersFavTeams,
-    getUserByToken,
-  } = await import('../util/database');
+  const { getSessionByToken, getUsersFavTeams, getUserByToken } = await import(
+    '../util/database'
+  );
 
   const scoresArray = await getLastNightScores();
 
@@ -270,7 +267,7 @@ export async function getServerSideProps(context) {
     const favTeams = favoriteTeamsArray.map((team) => team.teamName);
     const favTeamsInOneString = favTeams.join();
     const queryString = favTeamsInOneString.replace(',', ' ');
-    console.log(queryString);
+    // console.log(queryString);
 
     const newsArray = await getPersonalizedNewsFromLastTwoDays(queryString);
 
