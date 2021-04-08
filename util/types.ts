@@ -21,6 +21,7 @@ export type Teams = {
   conference: string;
   division: string;
   city: string;
+  nbaTricode: string;
 };
 
 export type FavoriteTeams = {

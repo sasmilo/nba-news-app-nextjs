@@ -2,11 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "UpLeveled Node + React TSConfig",
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "module": "esnext",
     "target": "es2015",
     "moduleResolution": "node",
@@ -21,16 +17,9 @@
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
-    "strict": true
+    "strict": true,
+    "types": ["@emotion/react/types/css-prop"]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "**/*.js"
-  ],
-  "exclude": [
-    "node_modules",
-    "build"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
+  "exclude": ["node_modules", "build"]
 }

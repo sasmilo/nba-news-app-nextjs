@@ -121,6 +121,7 @@ export default function Profile(props: Props) {
                   });
 
                   const { userTeamPair } = await response.json();
+                  console.log(userTeamPair);
                 }}
               >
                 Remove
@@ -129,7 +130,7 @@ export default function Profile(props: Props) {
           ))}
         </ul>
         <br />
-        <div>Pick your favorite teams to get news exclusively on them:</div>
+        <div>Pick your favorite teams and get news exclusively on them:</div>
 
         <br />
         <ul css={preferenceStyles}>
@@ -137,7 +138,6 @@ export default function Profile(props: Props) {
             <li key={team.teamId}>
               <div>
                 <button
-                  type="checkbox"
                   onClick={async () => {
                     const teamIdNr = team.teamId;
                     const response = await fetch('/api/create-user-team', {
@@ -152,6 +152,7 @@ export default function Profile(props: Props) {
                     });
 
                     const { userTeamPair } = await response.json();
+                    console.log(userTeamPair);
                   }}
                 >
                   Add
@@ -171,6 +172,7 @@ export default function Profile(props: Props) {
                     });
 
                     const { userTeamPair } = await response.json();
+                    console.log(userTeamPair);
                   }}
                 >
                   Remove

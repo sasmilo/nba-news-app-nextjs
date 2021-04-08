@@ -51,7 +51,7 @@ export default async function getGeneralNewsFromLastTwoDays() {
 
       return newsArray;
     })
-    .catch(function (error: Error) {
+    .catch(function (error) {
       console.error(error);
     });
   return newsDataArray;
