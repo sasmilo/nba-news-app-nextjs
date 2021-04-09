@@ -58,6 +58,7 @@ export default function BoxScore(props) {
       });
   }, [gameDate, gameId]);
 
+  // this is not error, bcs sometimes the answer from api comes late, and in meantime we show this conditional render
   if (!boxscore) return <div>Searching for the stats...</div>;
 
   return (

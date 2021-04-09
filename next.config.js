@@ -47,6 +47,7 @@ module.exports = {
       'www.theglobeandmail.com',
       'img-s-msn-com.akamaized.net',
       'therookiewire.usatoday.com',
+      'thumbor.forbes.com',
       // 'www.basketball.realgm.com',
       // 'www.foxsports.com',
       // 'www.news.google.com',

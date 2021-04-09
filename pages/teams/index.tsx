@@ -138,6 +138,7 @@ export default function TeamsPage(props: Props) {
 
                   const { userTeamPair } = await response.json();
                   console.log(userTeamPair);
+                  location.reload(false);
                 }}
               >
                 Remove
@@ -169,6 +170,7 @@ export default function TeamsPage(props: Props) {
 
                     const { userTeamPair } = await response.json();
                     console.log(userTeamPair);
+                    location.reload(false);
                   }}
                 >
                   Add
@@ -189,6 +191,7 @@ export default function TeamsPage(props: Props) {
 
                     const { userTeamPair } = await response.json();
                     console.log(userTeamPair);
+                    location.reload(false);
                   }}
                 >
                   Remove

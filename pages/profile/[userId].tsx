@@ -75,9 +75,17 @@ export default function Profile(props: Props) {
     );
   }
 
+  const allTeams = props.teams;
   const userIdNr = props.user.userId;
   const usersTeams = props.favoriteTeams;
-  const allTeams = props.teams;
+
+  // const [usersTeams, setUsersTeams] = useState(props.favoriteTeams);
+
+  // useEffect(() => {
+  //   setUsersTeams(usersTeams);
+  // }, [usersTeams]);
+
+  console.log(usersTeams);
 
   // console.log(typeof allTeams);
   // console.log(allTeams);
@@ -109,6 +117,7 @@ export default function Profile(props: Props) {
               <button
                 onClick={async () => {
                   const teamIdNr = team.teamId;
+
                   const response = await fetch('/api/delete-user-team ', {
                     method: 'POST',
                     headers: {
@@ -122,6 +131,13 @@ export default function Profile(props: Props) {
 
                   const { userTeamPair } = await response.json();
                   console.log(userTeamPair);
+
+                  // const restOfFavTeams = usersTeams.filter(
+                  //   (obj) => obj.teamId !== userTeamPair.teamId,
+                  // );
+                  location.reload(false);
+                  // setUsersTeams(userTeamPair);
+                  // console.log(userTeamPair);
                 }}
               >
                 Remove
@@ -153,6 +169,7 @@ export default function Profile(props: Props) {
 
                     const { userTeamPair } = await response.json();
                     console.log(userTeamPair);
+                    location.reload(false);
                   }}
                 >
                   Add
@@ -173,6 +190,7 @@ export default function Profile(props: Props) {
 
                     const { userTeamPair } = await response.json();
                     console.log(userTeamPair);
+                    location.reload(false);
                   }}
                 >
                   Remove
