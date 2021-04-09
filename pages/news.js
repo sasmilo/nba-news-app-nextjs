@@ -1,6 +1,4 @@
 export default async function getGeneralNewsFromLastTwoDays() {
-
-
   // const user = props.user;
   // const teams = await getTeams();
   // const favoriteTeams = props.favoriteTeams;

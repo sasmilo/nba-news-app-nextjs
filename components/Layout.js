@@ -171,7 +171,6 @@ export default function Layout(props) {
                   Router.push(`/search/?=${newSearch}`);
                 }
               }}
-              // setSearchCookieClientSide(newSearch);
             />
           </div>
 

@@ -2,6 +2,8 @@ import { css, Global } from '@emotion/react';
 import { useEffect, useState } from 'react';
 import Layout from '../components/Layout';
 
+const ourGray = '#1d2d35';
+
 export const globalStyles = (
   <Global
     styles={css`
@@ -9,7 +11,7 @@ export const globalStyles = (
       body {
         margin: 0;
         padding: 0;
-        background: white;
+        background: ${ourGray};
         min-height: 70vh;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
           Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;

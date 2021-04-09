@@ -47,7 +47,6 @@ export default function Register(props: Props) {
             : router.query.returnTo;
 
           router.push(returnTo || '/login');
-          // router.push(returnTo || `/profile/${user.userId}`);
         }}
       >
         <label>

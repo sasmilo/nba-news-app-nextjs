@@ -45,6 +45,8 @@ module.exports = {
       'lebronwire.usatoday.com',
       'i.cbc.ca',
       'www.theglobeandmail.com',
+      'img-s-msn-com.akamaized.net',
+      'therookiewire.usatoday.com',
       // 'www.basketball.realgm.com',
       // 'www.foxsports.com',
       // 'www.news.google.com',

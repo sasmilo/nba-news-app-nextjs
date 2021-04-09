@@ -6,64 +6,6 @@ import { useEffect, useState } from 'react';
 const axios = require('axios');
 const paddBott = '20px';
 
-const singleProductStyle = css`
-  display: block;
-  align-items: center;
-`;
-
-const productNameStyle = css`
-  font-family: 'Crimson Text Regular', 'PT Sans', 'Helvetica', 'Arial',
-    sans-serif;
-  text-align: center;
-  padding-bottom: ${paddBott};
-`;
-
-const productImageStyle = css`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: ${paddBott};
-`;
-
-const productPriceStyle = css`
-  font-family: 'Source Sans Pro Regular', 'PT Sans', 'Helvetica', 'Arial',
-    sans-serif;
-  text-align: center;
-  padding-bottom: ${paddBott};
-
-  p {
-    font-size: 1.2em;
-  }
-
-  p + p {
-    font-size: 0.8em;
-  }
-`;
-
-const productDescriptionStyle = css`
-  font-family: 'Source Sans Pro Regular', 'PT Sans', 'Helvetica', 'Arial',
-    sans-serif;
-  text-align: center;
-  padding-bottom: ${paddBott};
-  font-size: 0.8em;
-  max-width: 80%;
-  margin: auto;
-`;
-
-const productDetailsStyle = css`
-  font-family: 'Source Sans Pro Regular', 'PT Sans', 'Helvetica', 'Arial',
-    sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-bottom: ${paddBott};
-  font-size: 0.6em;
-
-  p + p {
-    padding-left: 10px;
-  }
-`;
-
 const boxscoreHeadingStyles = css`
   display: flex;
   align-items: center;
@@ -116,7 +58,7 @@ export default function BoxScore(props) {
       });
   }, [gameDate, gameId]);
 
-  if (!boxscore) return <div>Getting ready...</div>;
+  if (!boxscore) return <div>Searching for the stats...</div>;
 
   return (
     <>

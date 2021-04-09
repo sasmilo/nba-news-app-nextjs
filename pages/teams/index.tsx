@@ -63,21 +63,39 @@ type Props =
       errors: Error[];
     };
 
-export default function Profile(props: Props) {
+export default function TeamsPage(props: Props) {
+  const allTeams = props.teams;
+
   if (!props.user) {
     return (
       <>
         <Head>
-          <title>{props.errors[0].message}</title>
+          <title>Teams</title>
         </Head>
-        <h1>{props.errors[0].message}</h1>
+        <h3>{props.errors[0].message}</h3>
+
+        <ul css={preferenceStyles}>
+          {allTeams.map((team) => (
+            <li key={team.teamId}>
+              <div>
+                <Image
+                  src={`/${allTeams[team.teamId - 1].nbaTricode}.png`}
+                  alt="Image"
+                  width={30}
+                  height={30}
+                />{' '}
+                {team.teamName}: {team.conference} Conference, {team.division}
+                Division
+              </div>
+            </li>
+          ))}
+        </ul>
       </>
     );
   }
 
   const userIdNr = props.user.userId;
   const usersTeams = props.favoriteTeams;
-  const allTeams = props.teams;
 
   // console.log(typeof allTeams);
   // console.log(allTeams);
@@ -87,14 +105,12 @@ export default function Profile(props: Props) {
   return (
     <>
       <Head>
-        <title>User Profile: {props.user.username}</title>
+        <title>Teams</title>
       </Head>
       <div css={profileStyles}>
-        <h1>Username: {props.user.username}</h1>
-
-        <div>User ID: {userIdNr}</div>
         <br />
         <div>Your current favorite teams:</div>
+        <br />
         <ul css={preferenceStyles}>
           {usersTeams.map((team) => (
             <li key={team.teamId}>
@@ -195,23 +211,29 @@ export default function Profile(props: Props) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { getUserById, getSessionByToken, getUsersFavTeams } = await import(
+  const { getSessionByToken, getUsersFavTeams, getUserByToken } = await import(
     '../../util/database'
   );
 
   const session = await getSessionByToken(context.req.cookies.session);
+  // console.log(session);
+  const teams = await getTeams();
+  const userByToken = await getUserByToken(session);
+  // console.log(userByToken);
 
-  if (!session || session.userId !== Number(context.query.userId)) {
+  if (!session || session.userId !== userByToken.userId) {
     return {
       props: {
         user: null,
-        errors: [{ message: 'You need to login first' }],
+        teams: teams,
+        errors: [{ message: 'You need to login to see your favorite teams' }],
       },
     };
   }
 
-  const user = await getUserById(context.query.userId);
-  const teams = await getTeams();
+  const user = userByToken;
+  // console.log(user);
+
   const favoriteTeams = await getUsersFavTeams(user.userId);
   // console.log(favoriteTeams);
 

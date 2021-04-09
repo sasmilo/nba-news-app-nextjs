@@ -1,19 +1,9 @@
 export default async function getSpecialNewsFromLastTwoDays(favTeams) {
-  // const user = props.user;
-  // const teams = await getTeams();
-  // const favoriteTeams = props.favoriteTeams;
-  // console.log(favoriteTeams);
+
 
   const axios = require('axios').default;
 
-  // console.log(favTeams);
 
-  // {!props.isSessionValid ? (
-  //   searchTerm = 'nba news' ) : (
-
-  //     searchTerm =
-
-  //    )}
 
   const options = {
     method: 'GET',
