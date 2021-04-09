@@ -48,6 +48,7 @@ module.exports = {
       'img-s-msn-com.akamaized.net',
       'therookiewire.usatoday.com',
       'thumbor.forbes.com',
+      'boston.cbslocal.com',
       // 'www.basketball.realgm.com',
       // 'www.foxsports.com',
       // 'www.news.google.com',

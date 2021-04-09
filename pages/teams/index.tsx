@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import { getTeams } from '../../util/database';
 import { Error, FavoriteTeams, Teams, User } from '../../util/types';
 
@@ -44,6 +45,11 @@ const preferenceStyles = css`
     margin-left: 5px;
     margin-right: 5px;
   }
+
+  a {
+    text-decoration: none;
+    color: ${ourGray};
+  }
 `;
 
 const imgStyles = css`
@@ -78,14 +84,19 @@ export default function TeamsPage(props: Props) {
           {allTeams.map((team) => (
             <li key={team.teamId}>
               <div>
-                <Image
-                  src={`/${allTeams[team.teamId - 1].nbaTricode}.png`}
-                  alt="Image"
-                  width={30}
-                  height={30}
-                />{' '}
-                {team.teamName}: {team.conference} Conference, {team.division}
-                Division
+                <Link href={`/teams/${team.teamId}`}>
+                  <a>
+                    <Image
+                      src={`/${allTeams[team.teamId - 1].nbaTricode}.png`}
+                      alt="Image"
+                      width={30}
+                      height={30}
+                    />{' '}
+                    {team.teamName}: {team.conference} Conference,{' '}
+                    {team.division}
+                    Division
+                  </a>
+                </Link>
               </div>
             </li>
           ))}
@@ -114,14 +125,18 @@ export default function TeamsPage(props: Props) {
         <ul css={preferenceStyles}>
           {usersTeams.map((team) => (
             <li key={team.teamId}>
-              <Image
-                css={imgStyles}
-                src={`/${allTeams[team.teamId - 1].nbaTricode}.png`}
-                alt="Image"
-                width={30}
-                height={30}
-              />{' '}
-              {allTeams[team.teamId - 1].teamName}{' '}
+              <Link href={`/teams/${team.teamId}`}>
+                <a>
+                  <Image
+                    css={imgStyles}
+                    src={`/${allTeams[team.teamId - 1].nbaTricode}.png`}
+                    alt="Image"
+                    width={30}
+                    height={30}
+                  />{' '}
+                  {allTeams[team.teamId - 1].teamName}{' '}
+                </a>
+              </Link>
               <button
                 onClick={async () => {
                   const teamIdNr = team.teamId;
@@ -138,6 +153,7 @@ export default function TeamsPage(props: Props) {
 
                   const { userTeamPair } = await response.json();
                   console.log(userTeamPair);
+                  // eslint-disable-next-line
                   location.reload(false);
                 }}
               >
@@ -170,6 +186,7 @@ export default function TeamsPage(props: Props) {
 
                     const { userTeamPair } = await response.json();
                     console.log(userTeamPair);
+                    // eslint-disable-next-line
                     location.reload(false);
                   }}
                 >
@@ -191,19 +208,24 @@ export default function TeamsPage(props: Props) {
 
                     const { userTeamPair } = await response.json();
                     console.log(userTeamPair);
+                    // eslint-disable-next-line
                     location.reload(false);
                   }}
                 >
                   Remove
                 </button>
-                <Image
-                  src={`/${allTeams[team.teamId - 1].nbaTricode}.png`}
-                  alt="Image"
-                  width={30}
-                  height={30}
-                />{' '}
-                {team.teamName}: {team.conference} Conference, {team.division}
-                Division
+                <Link href={`/teams/${team.teamId}`}>
+                  <a>
+                    <Image
+                      src={`/${allTeams[team.teamId - 1].nbaTricode}.png`}
+                      alt="Image"
+                      width={30}
+                      height={30}
+                    />{' '}
+                    {team.teamName}: {team.conference} Conference,{' '}
+                    {team.division} Division
+                  </a>
+                </Link>
               </div>
             </li>
           ))}
@@ -236,6 +258,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const user = userByToken;
   // console.log(user);
+  const userId = user.userId;
 
   const favoriteTeams = await getUsersFavTeams(user.userId);
   // console.log(favoriteTeams);
@@ -243,6 +266,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: {
       user: user,
+      userId: userId,
       teams: teams,
       favoriteTeams: favoriteTeams,
     },

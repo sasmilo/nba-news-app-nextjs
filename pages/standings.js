@@ -121,12 +121,21 @@ export default function Standings(props) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context) {
+  const { getSessionByToken, getUserByToken } = await import(
+    '../util/database'
+  );
+
+  const session = await getSessionByToken(context.req.cookies.session);
+  const userByToken = await getUserByToken(session);
+  const userId = userByToken.userId;
+
   const standingsArray = await getStandings();
 
   return {
     props: {
       standingsArray: standingsArray,
+      userId: userId,
     },
   };
 }

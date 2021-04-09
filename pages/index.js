@@ -117,7 +117,7 @@ const newsTextStyles = css`
 
 export default function Home(props) {
   // console.log(props.newsArray);
-  getLastNightScores();
+  // getLastNightScores();
   // console.log(props.scoresArray[0].vTeam.triCode);
 
   const responsive = {
@@ -268,6 +268,7 @@ export async function getServerSideProps(context) {
     const favTeamsInOneString = favTeams.join();
     const queryString = favTeamsInOneString.replace(',', ' ');
     // console.log(queryString);
+    const userId = user.userId;
 
     const newsArray = await getPersonalizedNewsFromLastTwoDays(queryString);
 
@@ -275,6 +276,7 @@ export async function getServerSideProps(context) {
       props: {
         newsArray: newsArray || [],
         scoresArray: scoresArray || [],
+        userId: userId,
       },
     };
   }

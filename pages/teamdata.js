@@ -18,11 +18,11 @@ export async function getTeamInfoFromApi(teamTricode) {
         return obj.tricode === teamTricode;
       });
 
-      console.log(teamObject);
+      // console.log(teamObject);
       return teamObject;
     })
     .catch(function (error) {
       console.error(error);
     });
-    return team;
+  return team;
 }

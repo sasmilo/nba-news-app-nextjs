@@ -27,6 +27,7 @@ const headerStyles = css`
 
 const headerDiv1 = css`
   padding-right: auto;
+  margin-right: auto;
 `;
 
 const headerDiv2 = css`
@@ -69,7 +70,7 @@ const searchStyles = css`
 
 const navStyles = css`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 const footerStyles = css`
@@ -126,7 +127,9 @@ const loginStyles = css`
 `;
 
 export default function Layout(props) {
-  // const userId = props.user.userId;
+  const userId = props.children.props.userId;
+  // console.log(props);
+  // console.log(userId);
 
   return (
     <>
@@ -168,7 +171,7 @@ export default function Layout(props) {
                 const newSearch = event.target.value;
                 if (event.key === 'Enter') {
                   setSearchCookieClientSide(newSearch);
-                  Router.push(`/search/?=${newSearch}`);
+                  Router.push(`/search/?q=${newSearch}`);
                 }
               }}
             />
@@ -187,16 +190,16 @@ export default function Layout(props) {
                 </>
               ) : (
                 <div>
-                  {/* <Link href={`/profile/${userId}`}>
-              <a>
-                <Image
-                  src="/account3.svg"
-                  alt="account icon"
-                  width={40}
-                  height={40}
-                />
-              </a>
-            </Link> */}
+                  <Link href={`/profile/${userId}`}>
+                    <a>
+                      <Image
+                        src="/account3.svg"
+                        alt="account icon"
+                        width={40}
+                        height={40}
+                      />
+                    </a>
+                  </Link>
                   <Link href="/logout">
                     <a data-cy="header-logout">Logout</a>
                   </Link>

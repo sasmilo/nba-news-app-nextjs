@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
+import Link from 'next/link';
 import { getTeams } from '../../util/database';
 import { Error, FavoriteTeams, Teams, User } from '../../util/types';
 
@@ -44,6 +45,11 @@ const preferenceStyles = css`
     margin-left: 5px;
     margin-right: 5px;
   }
+
+  a {
+    text-decoration: none;
+    color: ${ourGray};
+  }
 `;
 
 const imgStyles = css`
@@ -85,7 +91,7 @@ export default function Profile(props: Props) {
   //   setUsersTeams(usersTeams);
   // }, [usersTeams]);
 
-  console.log(usersTeams);
+  // console.log(usersTeams);
 
   // console.log(typeof allTeams);
   // console.log(allTeams);
@@ -106,14 +112,18 @@ export default function Profile(props: Props) {
         <ul css={preferenceStyles}>
           {usersTeams.map((team) => (
             <li key={team.teamId}>
-              <Image
-                css={imgStyles}
-                src={`/${allTeams[team.teamId - 1].nbaTricode}.png`}
-                alt="Image"
-                width={30}
-                height={30}
-              />{' '}
-              {allTeams[team.teamId - 1].teamName}{' '}
+              <Link href={`/teams/${team.teamId}`}>
+                <a>
+                  <Image
+                    css={imgStyles}
+                    src={`/${allTeams[team.teamId - 1].nbaTricode}.png`}
+                    alt="Image"
+                    width={30}
+                    height={30}
+                  />{' '}
+                  {allTeams[team.teamId - 1].teamName}{' '}
+                </a>
+              </Link>
               <button
                 onClick={async () => {
                   const teamIdNr = team.teamId;
@@ -135,6 +145,7 @@ export default function Profile(props: Props) {
                   // const restOfFavTeams = usersTeams.filter(
                   //   (obj) => obj.teamId !== userTeamPair.teamId,
                   // );
+                  // eslint-disable-next-line
                   location.reload(false);
                   // setUsersTeams(userTeamPair);
                   // console.log(userTeamPair);
@@ -169,6 +180,7 @@ export default function Profile(props: Props) {
 
                     const { userTeamPair } = await response.json();
                     console.log(userTeamPair);
+                    // eslint-disable-next-line
                     location.reload(false);
                   }}
                 >
@@ -190,19 +202,25 @@ export default function Profile(props: Props) {
 
                     const { userTeamPair } = await response.json();
                     console.log(userTeamPair);
+                    // eslint-disable-next-line
                     location.reload(false);
                   }}
                 >
                   Remove
                 </button>
-                <Image
-                  src={`/${allTeams[team.teamId - 1].nbaTricode}.png`}
-                  alt="Image"
-                  width={30}
-                  height={30}
-                />{' '}
-                {team.teamName}: {team.conference} Conference, {team.division}
-                Division
+                <Link href={`/teams/${team.teamId}`}>
+                  <a>
+                    <Image
+                      src={`/${allTeams[team.teamId - 1].nbaTricode}.png`}
+                      alt="Image"
+                      width={30}
+                      height={30}
+                    />{' '}
+                    {team.teamName}: {team.conference} Conference,{' '}
+                    {team.division}
+                    Division
+                  </a>
+                </Link>
               </div>
             </li>
           ))}
@@ -229,6 +247,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 
   const user = await getUserById(context.query.userId);
+
   const teams = await getTeams();
   const favoriteTeams = await getUsersFavTeams(user.userId);
   // console.log(favoriteTeams);

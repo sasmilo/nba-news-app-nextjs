@@ -79,6 +79,24 @@ export async function getUserByToken(sessionToken) {
   return camelcaseRecords(sessions)[0];
 }
 
+export async function getUserIdByToken(sessionToken) {
+  if (!sessionToken) {
+    return undefined;
+  }
+
+  const sessions = await sql`
+    SELECT
+      user_id
+    FROM
+      sessions
+    WHERE
+      token = ${sessionToken}
+  `;
+  // console.log(sessions);
+
+  return camelcaseRecords(sessions)[0];
+}
+
 export async function isSessionTokenNotExpired(sessionToken) {
   const sessions = await sql`
     SELECT
@@ -229,8 +247,6 @@ export async function getUsersFavTeams(userId) {
   // console.log(userFavTeams);
   return camelcaseRecords(userFavTeams);
 }
-
-
 
 export async function deleteUserTeamPair(userId, teamId) {
   const usersTeams = await sql`
