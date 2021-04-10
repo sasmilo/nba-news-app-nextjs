@@ -1,9 +1,5 @@
 export default async function getSpecialNewsFromLastTwoDays(favTeams) {
-
-
   const axios = require('axios').default;
-
-
 
   const options = {
     method: 'GET',
@@ -36,9 +32,7 @@ export default async function getSpecialNewsFromLastTwoDays(favTeams) {
   const newsDataArray = await axios
     .request(options)
     .then(function (response) {
-      // console.log(response);
       const newsArray = response.data.articles;
-
       return newsArray;
     })
     .catch(function (error) {

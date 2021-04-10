@@ -11,12 +11,9 @@ export default async function handler(
   // console.log(req.body);
   const userId = Number(req.body.userIdNr);
 
-
   const usersFavTeams = await getUsersFavTeams(userId);
 
   // console.log(usersFavTeams);
 
-  res.send({
-    usersFavTeams: usersFavTeams,
-  });
+  res.send({ usersFavTeams: usersFavTeams });
 }

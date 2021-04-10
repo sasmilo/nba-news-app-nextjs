@@ -2,6 +2,7 @@ import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { Error } from '../util/types';
 
 type Props = {
   csrfToken: string;
@@ -35,6 +36,7 @@ export default function Register(props: Props) {
             }),
           });
 
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { user, errors: returnedErrors } = await response.json();
 
           if (returnedErrors) {
