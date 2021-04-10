@@ -15,7 +15,9 @@ export default function Logout(props: Props) {
         <title>Logged out successfully</title>
       </Head>
 
-      <h1>Logged out successfully</h1>
+      <h1
+      data-cy="logout-content-h1"
+      >Logged out successfully</h1>
     </>
   );
 }

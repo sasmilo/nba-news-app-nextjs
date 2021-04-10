@@ -52,21 +52,27 @@ export default function Login(props: Props) {
         }}
       >
         <label>
-          username:
+          Username:
           <input
+            data-cy="user-first-name"
             value={username}
             onChange={(event) => setUsername(event.currentTarget.value)}
           />
         </label>
+        <br />
         <label>
-          password:
+          Password:
           <input
+            data-cy="user-last-name"
             type="password"
             value={password}
             onChange={(event) => setPassword(event.currentTarget.value)}
           />
         </label>
-        <button type="submit">login</button>
+        <br />
+        <button data-cy="click-login" type="submit">
+          login
+        </button>
       </form>
 
       {errors.map((error) => (

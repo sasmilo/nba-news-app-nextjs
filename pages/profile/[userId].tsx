@@ -104,7 +104,9 @@ export default function Profile(props: Props) {
         <title>User Profile: {props.user.username}</title>
       </Head>
       <div css={profileStyles}>
-        <h1>Username: {props.user.username}</h1>
+        <h1 data-cy="profile-page-content-h1">
+          Username: {props.user.username}
+        </h1>
 
         <div>User ID: {userIdNr}</div>
         <br />

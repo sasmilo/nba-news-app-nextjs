@@ -128,14 +128,28 @@ export async function getServerSideProps(context) {
 
   const session = await getSessionByToken(context.req.cookies.session);
   const userByToken = await getUserByToken(session);
-  const userId = userByToken.userId;
 
-  const standingsArray = await getStandings();
+  if (
+    !session ||
+    session.userId !== userByToken.userId ||
+    userByToken === 'undefined'
+  ) {
+    const standingsArray = await getStandings();
+    return {
+      props: {
+        standingsArray: standingsArray,
+      },
+    };
+  } else {
+    const userId = userByToken.userId;
 
-  return {
-    props: {
-      standingsArray: standingsArray,
-      userId: userId,
-    },
-  };
+    const standingsArray = await getStandings();
+
+    return {
+      props: {
+        standingsArray: standingsArray,
+        userId: userId,
+      },
+    };
+  }
 }

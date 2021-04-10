@@ -54,6 +54,7 @@ export default function Register(props: Props) {
         <label>
           Username:
           <input
+            data-cy="create-user-first-name"
             value={username}
             onChange={(event) => setUsername(event.currentTarget.value)}
           />
@@ -62,12 +63,14 @@ export default function Register(props: Props) {
         <label>
           Password:
           <input
+            data-cy="create-user-last-name"
             type="password"
             value={password}
             onChange={(event) => setPassword(event.currentTarget.value)}
           />
         </label>
-        <button type="submit">Register</button>
+        <button
+        data-cy="click-register" type="submit">Register</button>
       </form>
 
       {errors.map((error) => (

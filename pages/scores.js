@@ -187,13 +187,27 @@ export async function getServerSideProps(context) {
 
   const session = await getSessionByToken(context.req.cookies.session);
   const userByToken = await getUserByToken(session);
-  const userId = userByToken.userId;
 
-  const yestScoresArray = await GetLastNightScores();
-  return {
-    props: {
-      yestScoresArray: yestScoresArray || [],
-      userId: userId,
-    },
-  };
+  if (
+    !session ||
+    session.userId !== userByToken.userId ||
+    userByToken === 'undefined'
+  ) {
+    const yestScoresArray = await GetLastNightScores();
+    return {
+      props: {
+        yestScoresArray: yestScoresArray || [],
+      },
+    };
+  } else {
+    const userId = userByToken.userId;
+
+    const yestScoresArray = await GetLastNightScores();
+    return {
+      props: {
+        yestScoresArray: yestScoresArray || [],
+        userId: userId,
+      },
+    };
+  }
 }
