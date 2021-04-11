@@ -13,6 +13,11 @@ const ourOrange = '#FFA500';
 const profileStyles = css`
   background-color: ${ourGray};
   color: ${lightGray};
+
+  h3,
+  p {
+    padding-left: 20px;
+  }
 `;
 
 const preferenceStyles = css`
@@ -20,6 +25,8 @@ const preferenceStyles = css`
   background-color: ${lightGray};
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-left: 20px;
+  list-style-type: none;
 
   li {
     align-self: stretch;
@@ -78,11 +85,13 @@ export default function TeamsPage(props: Props) {
         <Head>
           <title>Teams</title>
         </Head>
-        <h3>{props.errors[0].message}</h3>
+        <div css={profileStyles}>
+          <h3>{props.errors[0].message}</h3>
+        </div>
 
         <ul css={preferenceStyles}>
           {allTeams.map((team) => (
-            <li key={team.teamId} >
+            <li key={team.teamId}>
               <div>
                 <Link href={`/teams/${team.teamId}`}>
                   <a>
@@ -121,7 +130,7 @@ export default function TeamsPage(props: Props) {
       </Head>
       <div css={profileStyles}>
         <br />
-        <div>Your current favorite teams:</div>
+        <h3>Your current favorite teams:</h3>
         <br />
         <ul css={preferenceStyles}>
           {usersTeams.map((team) => (
@@ -164,7 +173,7 @@ export default function TeamsPage(props: Props) {
           ))}
         </ul>
         <br />
-        <div>Pick your favorite teams and get news exclusively on them:</div>
+        <p>Pick your favorite teams and get news exclusively on them:</p>
 
         <br />
         <ul css={preferenceStyles}>

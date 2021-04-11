@@ -61,6 +61,7 @@ type Props =
       user: User;
       teams: Teams[];
       favoriteTeams: FavoriteTeams[];
+      csrfToken: string;
     }
   | {
       user: null;
@@ -145,6 +146,7 @@ export default function Profile(props: Props) {
                     body: JSON.stringify({
                       userIdNr,
                       teamIdNr,
+                      csrfToken: props.csrfToken,
                     }),
                   });
 
@@ -184,6 +186,7 @@ export default function Profile(props: Props) {
                       body: JSON.stringify({
                         userIdNr,
                         teamIdNr,
+                        csrfToken: props.csrfToken,
                       }),
                     });
 
@@ -206,6 +209,7 @@ export default function Profile(props: Props) {
                       body: JSON.stringify({
                         userIdNr,
                         teamIdNr,
+                        csrfToken: props.csrfToken,
                       }),
                     });
 
@@ -240,9 +244,11 @@ export default function Profile(props: Props) {
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { getUserById, getSessionByToken, getUsersFavTeams } = await import(
+  const { getUserById, getUsersFavTeams, getSessionByToken } = await import(
     '../../util/database'
   );
+
+  const { createCsrfToken } = await import('../../util/auth');
 
   const session = await getSessionByToken(context.req.cookies.session);
 
@@ -255,6 +261,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
+  const csrfToken = createCsrfToken(session.token);
+
   const user = await getUserById(context.query.userId);
 
   const teams = await getTeams();
@@ -266,6 +274,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       user: user,
       teams: teams,
       favoriteTeams: favoriteTeams,
+      csrfToken: csrfToken,
     },
   };
 }
