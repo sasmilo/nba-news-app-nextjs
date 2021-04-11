@@ -45,7 +45,9 @@ export default function team(props) {
           height={150}
         />
         <br />
-        <h1>{teamName}</h1>
+        <h1
+        data-cy="team-page-content-h1"
+        >{teamName}</h1>
         <br />
         <Link href={teamWebpage}>
           <a>

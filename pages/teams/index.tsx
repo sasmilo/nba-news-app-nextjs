@@ -82,7 +82,7 @@ export default function TeamsPage(props: Props) {
 
         <ul css={preferenceStyles}>
           {allTeams.map((team) => (
-            <li key={team.teamId}>
+            <li key={team.teamId} >
               <div>
                 <Link href={`/teams/${team.teamId}`}>
                   <a>
@@ -91,6 +91,7 @@ export default function TeamsPage(props: Props) {
                       alt="Image"
                       width={30}
                       height={30}
+                      data-cy="teams-page-content-team-image"
                     />{' '}
                     {team.teamName}: {team.conference} Conference,{' '}
                     {team.division}

@@ -248,6 +248,28 @@ export async function getUsersFavTeams(userId) {
   return camelcaseRecords(userFavTeams);
 }
 
+export async function deleteUser(userId) {
+  const users = await sql`
+    DELETE FROM
+      users
+    WHERE
+    user_id = ${userId}
+    RETURNING user_id
+  `;
+  return camelcaseRecords(users);
+}
+
+export async function deleteUserfromUsersTeams(userId) {
+  const users = await sql`
+    DELETE FROM
+      users_teams
+    WHERE
+    user_id = ${userId}
+
+  `;
+  return camelcaseRecords(users);
+}
+
 export async function deleteUserTeamPair(userId, teamId) {
   const usersTeams = await sql`
     DELETE FROM

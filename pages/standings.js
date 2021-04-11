@@ -25,7 +25,8 @@ export default function Standings(props) {
       </Head>
 
       <main css={headingStandingsStyles}>
-        <h2>NBA Standings 2020/2021</h2>
+        <h2
+        data-cy="standings-page-content-h2">NBA Standings 2020/2021</h2>
         <div css={standingsStyles}>
           <div>
             <p>Eastern Conference</p>

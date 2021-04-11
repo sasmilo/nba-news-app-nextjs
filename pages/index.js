@@ -219,6 +219,7 @@ export default function Home(props) {
                           alt="Image"
                           width={130}
                           height={100}
+                          data-cy="home-page-content-image"
                         />
                       </div>
                       <div css={newsTextStyles}>

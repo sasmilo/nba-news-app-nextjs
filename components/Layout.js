@@ -153,13 +153,14 @@ export default function Layout(props) {
           </div>
           <div css={headerDiv2}>
             <Link href="/scores">
-              <a>Scores</a>
+              <a data-cy="header-scores">Scores</a>
             </Link>
             <Link href="/standings">
-              <a>Standings</a>
+              <a
+              data-cy="header-standings">Standings</a>
             </Link>
             <Link href="/teams">
-              <a>Teams</a>
+              <a data-cy="header-teams">Teams</a>
             </Link>
           </div>
           <div>

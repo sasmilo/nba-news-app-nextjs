@@ -70,6 +70,7 @@ type Props =
     };
 
 export default function Profile(props: Props) {
+  // const router = useRouter();
   if (!props.user) {
     return (
       <>
@@ -85,25 +86,31 @@ export default function Profile(props: Props) {
   const userIdNr = props.user.userId;
   const usersTeams = props.favoriteTeams;
 
-  // const [usersTeams, setUsersTeams] = useState(props.favoriteTeams);
-
-  // useEffect(() => {
-  //   setUsersTeams(usersTeams);
-  // }, [usersTeams]);
-
-  // console.log(usersTeams);
-
-  // console.log(typeof allTeams);
-  // console.log(allTeams);
-
-  // console.log(usersTeams);
-
   return (
     <>
       <Head>
         <title>User Profile: {props.user.username}</title>
       </Head>
       <div css={profileStyles}>
+        {/* <button
+          onClick={async () => {
+            const response = await fetch('/api/delete-user ', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                userIdNr,
+              }),
+            });
+
+            const { deletedUser } = await response.json();
+            console.log(deletedUser);
+            router.push('/userdeleted');
+          }}
+        >
+          Delete your profile
+        </button> */}
         <h1 data-cy="profile-page-content-h1">
           Username: {props.user.username}
         </h1>

@@ -95,7 +95,7 @@ export default function Scores(props) {
       </Head>
 
       <main>
-        <p css={paragraphStyles}>
+        <p css={paragraphStyles} data-cy="scores-page-content-p">
           Game scores on the day:
           {'  '}
           {'  '}

@@ -69,8 +69,9 @@ export default function Register(props: Props) {
             onChange={(event) => setPassword(event.currentTarget.value)}
           />
         </label>
-        <button
-        data-cy="click-register" type="submit">Register</button>
+        <button data-cy="click-register" type="submit">
+          Register
+        </button>
       </form>
 
       {errors.map((error) => (
