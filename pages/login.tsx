@@ -1,7 +1,35 @@
+import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useState } from 'react';
+
+const ourGray = '#1d2d35';
+const lightGray = '#E9E4E4';
+const ourOrange = '#FFA500';
+
+const formStyles = css`
+  background-color: ${ourGray};
+  color: ${lightGray};
+  padding: 20px;
+
+  button {
+    background-color: ${ourOrange};
+    color: ${ourGray};
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 20 px;
+    font-weight: 800;
+    line-height: 1rem;
+  }
+
+  input {
+    background-color: ${lightGray};
+    color: ${ourGray};
+    padding-left: 5px;
+  }
+`;
 
 type Props = {
   csrfToken: string;
@@ -21,6 +49,7 @@ export default function Login(props: Props) {
       </Head>
 
       <form
+        css={formStyles}
         onSubmit={async (event) => {
           event.preventDefault();
 
@@ -52,7 +81,7 @@ export default function Login(props: Props) {
         }}
       >
         <label>
-          Username:
+          Username: {'  '}
           <input
             data-cy="user-first-name"
             value={username}
@@ -61,7 +90,7 @@ export default function Login(props: Props) {
         </label>
         <br />
         <label>
-          Password:
+          Password: {'  '}
           <input
             data-cy="user-last-name"
             type="password"
@@ -71,7 +100,7 @@ export default function Login(props: Props) {
         </label>
         <br />
         <button data-cy="click-login" type="submit">
-          login
+          Login
         </button>
       </form>
 

@@ -156,8 +156,7 @@ export default function Layout(props) {
               <a data-cy="header-scores">Scores</a>
             </Link>
             <Link href="/standings">
-              <a
-              data-cy="header-standings">Standings</a>
+              <a data-cy="header-standings">Standings</a>
             </Link>
             <Link href="/teams">
               <a data-cy="header-teams">Teams</a>
@@ -172,7 +171,7 @@ export default function Layout(props) {
                 const newSearch = event.target.value;
                 if (event.key === 'Enter') {
                   setSearchCookieClientSide(newSearch);
-                  Router.push(`/search/?q=${newSearch}`);
+                  Router.push(`/search/?${newSearch}`);
                 }
               }}
             />

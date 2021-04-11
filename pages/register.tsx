@@ -1,8 +1,36 @@
+import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { Error } from '../util/types';
+
+const ourGray = '#1d2d35';
+const lightGray = '#E9E4E4';
+const ourOrange = '#FFA500';
+
+const formStyles = css`
+  background-color: ${ourGray};
+  color: ${lightGray};
+  padding: 20px;
+
+  button {
+    background-color: ${ourOrange};
+    color: ${ourGray};
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px 20 px;
+    font-weight: 800;
+    line-height: 1rem;
+  }
+
+  input {
+    background-color: ${lightGray};
+    color: ${ourGray};
+    padding-left: 5px;
+  }
+`;
 
 type Props = {
   csrfToken: string;
@@ -21,6 +49,7 @@ export default function Register(props: Props) {
       </Head>
 
       <form
+        css={formStyles}
         onSubmit={async (event) => {
           event.preventDefault();
 
@@ -52,7 +81,7 @@ export default function Register(props: Props) {
         }}
       >
         <label>
-          Username:
+          Username: {'  '}
           <input
             data-cy="create-user-first-name"
             value={username}
@@ -61,7 +90,7 @@ export default function Register(props: Props) {
         </label>
         <br />
         <label>
-          Password:
+          Password: {'  '}
           <input
             data-cy="create-user-last-name"
             type="password"
@@ -69,6 +98,7 @@ export default function Register(props: Props) {
             onChange={(event) => setPassword(event.currentTarget.value)}
           />
         </label>
+        <br />
         <button data-cy="click-register" type="submit">
           Register
         </button>
