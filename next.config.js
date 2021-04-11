@@ -52,6 +52,7 @@ module.exports = {
       'celticswire.usatoday.com',
       'nypost.com',
       'external-preview.redd.it',
+      'bostonglobe-prod.cdn.arcpublishing.com',
       // 'www.basketball.realgm.com',
       // 'www.foxsports.com',
       // 'www.news.google.com',

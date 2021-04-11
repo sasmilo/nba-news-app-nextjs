@@ -1,6 +1,17 @@
+import { css } from '@emotion/react';
 import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
 import { Dispatch, SetStateAction, useEffect } from 'react';
+
+const ourGray = '#1d2d35';
+const lightGray = '#E9E4E4';
+
+const logoutStyles = css`
+  text-align: center;
+  background-color: ${ourGray};
+  color: ${lightGray};
+  padding: 20px;
+`;
 
 type Props = {
   setIsSessionStateStale: Dispatch<SetStateAction<boolean>>;
@@ -15,7 +26,9 @@ export default function Logout(props: Props) {
         <title>Logged out successfully</title>
       </Head>
 
-      <h1 data-cy="logout-content-h1">Logged out successfully</h1>
+      <h3 css={logoutStyles} data-cy="logout-content-h1">
+        Logged out successfully
+      </h3>
     </>
   );
 }

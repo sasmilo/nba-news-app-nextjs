@@ -8,7 +8,6 @@ import { setSearchCookieClientSide } from '../util/cookies';
 const ourGray = '#1d2d35';
 const lightGray = '#E9E4E4';
 const ourOrange = '#FFA500';
-const footerGray = '#171727';
 
 const headerStyles = css`
   background: ${lightGray};
@@ -76,7 +75,7 @@ const navStyles = css`
 const footerStyles = css`
   border-top: 0.7px solid rgba(255, 255, 255, 0.5);
   padding: 0.6rem 0 0.7rem 0;
-  background: ${footerGray};
+  background: ${ourGray};
   text-align: center;
   color: white;
   font-family: 'PT Sans', 'Helvetica', 'Arial', sans-serif;

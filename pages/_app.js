@@ -18,7 +18,9 @@ export const globalStyles = (
         font-size: 24px;
       }
 
-      h1 {
+      h1,
+      h2,
+      h3 {
         margin-block-start: 0em;
         margin-block-end: 0em;
         margin-inline-start: 0px;

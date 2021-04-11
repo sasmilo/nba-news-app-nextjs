@@ -56,6 +56,14 @@ const scoresStyles = css`
 
 const paragraphStyles = css`
   text-align: center;
+  background-color: ${ourGray};
+  color: ${lightGray};
+  padding: 20px;
+
+  input {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+      Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
 `;
 
 export default function Scores(props) {
