@@ -9,7 +9,7 @@ export default async function handler(
   // console.log(userIdNr);
 
   if (!userIdNr) {
-    return res.status(401).send({ message: 'You are unauthorised to do this' });
+    return res.status(401).send({ message: 'You are unauthorized to do this' });
   }
 
   const teamIdNr = req.body.teamIdNr;

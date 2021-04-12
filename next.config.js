@@ -53,6 +53,8 @@ module.exports = {
       'nypost.com',
       'external-preview.redd.it',
       'bostonglobe-prod.cdn.arcpublishing.com',
+      'www.wgmd.com',
+      'a1.espncdn.com',
       // 'www.basketball.realgm.com',
       // 'www.foxsports.com',
       // 'www.news.google.com',
