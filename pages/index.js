@@ -4,9 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import getGeneralNewsFromLastTwoDays from '../components/news';
+import getPersonalizedNewsFromLastTwoDays from '../components/personalizednews';
 import getLastNightScores from '../components/yesterdayscores';
-import getGeneralNewsFromLastTwoDays from './news';
-import getPersonalizedNewsFromLastTwoDays from './personalizednews';
 
 const ourGray = '#1d2d35';
 const lightGray = '#E9E4E4';
