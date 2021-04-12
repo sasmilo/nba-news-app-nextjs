@@ -260,7 +260,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const session = await getSessionByToken(context.req.cookies.session);
 
-  const csrfToken = createCsrfToken(session.token);
   // console.log(session);
   const teams = await getTeams();
   const userByToken = await getUserByToken(session);
@@ -275,6 +274,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       },
     };
   }
+
+  const csrfToken = createCsrfToken(session.token);
 
   const user = userByToken;
   // console.log(user);

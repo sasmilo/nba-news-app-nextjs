@@ -5,13 +5,17 @@ import { useEffect, useState } from 'react';
 
 const axios = require('axios');
 const paddBott = '20px';
+const ourGray = '#1d2d35';
+const lightGray = '#E9E4E4';
 
 const boxscoreHeadingStyles = css`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: ${paddBott};
+  padding: ${paddBott};
   font-size: 0.8em;
+  background-color: ${ourGray};
+  color: ${lightGray};
 `;
 
 const teamsParentStyles = css`
@@ -26,6 +30,10 @@ const teamsStyles = css`
   justify-content: center;
   padding-bottom: ${paddBott};
   font-size: 0.8em;
+
+  span {
+    font-weight: 700;
+  }
 `;
 
 export default function BoxScore(props) {
@@ -73,8 +81,12 @@ export default function BoxScore(props) {
         {boxscore.arena.name},{'    '}
         {boxscore.arena.city}
         <br />
-        Local time and date: {boxscore.homeStartTime},{'    '}
-        {boxscore.homeStartDate}
+        Local time and date: {'    '}
+        {boxscore.homeStartTime.slice(0, 2)}:
+        {boxscore.homeStartTime.slice(2, 4)},{'    '}
+        {boxscore.homeStartDate.slice(6, 8)}.
+        {boxscore.homeStartDate.slice(4, 6)}.
+        {boxscore.homeStartDate.slice(0, 4)}
         <br />
         Attendance: {boxscore.attendance}
       </div>
@@ -87,9 +99,11 @@ export default function BoxScore(props) {
             height={100}
           />
           <br />
-          {boxscore.vTeam.triCode}
-          {'    '}
-          {boxscore.vTeam.score}
+          <span>
+            {boxscore.vTeam.triCode}
+            {'    '}
+            {boxscore.vTeam.score}
+          </span>
         </div>
         <div css={teamsStyles}>
           <Image
@@ -99,9 +113,11 @@ export default function BoxScore(props) {
             height={100}
           />
           <br />
-          {boxscore.hTeam.triCode}
-          {'    '}
-          {boxscore.hTeam.score}
+          <span>
+            {boxscore.hTeam.triCode}
+            {'    '}
+            {boxscore.hTeam.score}
+          </span>
         </div>
       </div>
     </>

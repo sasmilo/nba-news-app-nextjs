@@ -45,9 +45,7 @@ export default function team(props) {
           height={150}
         />
         <br />
-        <h1
-        data-cy="team-page-content-h1"
-        >{teamName}</h1>
+        <h1 data-cy="team-page-content-h1">{teamName}</h1>
         <br />
         <Link href={teamWebpage}>
           <a>
@@ -92,8 +90,8 @@ export async function getServerSideProps(context) {
   );
 
   const session = await getSessionByToken(context.req.cookies.session);
+
   const userByToken = await getUserByToken(session);
-  const userId = userByToken.userId;
 
   const { getTeamInfoFromApi } = await import('../teamdata');
 
@@ -105,7 +103,7 @@ export async function getServerSideProps(context) {
 
   const teamObject = await getTeamInfoFromApi(teamTricode);
   // console.log(teamObject);
-  console.log(teamObject.web.homepage);
+  // console.log(teamObject.web.homepage);
 
   const teamName = teamObject.ttsName;
   const primaryColor = teamObject.primaryColor;
@@ -116,6 +114,25 @@ export async function getServerSideProps(context) {
   const teamTickets = teamObject.web.tickets;
 
   // console.log(gameDate);
+
+  if (!session || session.userId !== userByToken.userId) {
+    return {
+      props: {
+        userId: null,
+        teamTricode: teamTricode,
+        teamName: teamName,
+        primaryColor: primaryColor,
+        secondaryColor: secondaryColor,
+        teamAndroidApp: teamAndroidApp,
+        teamIosApp: teamIosApp,
+        teamWebpage: teamWebpage,
+        teamTickets: teamTickets,
+      },
+    };
+  }
+
+  const userId = userByToken.userId;
+
   return {
     props: {
       userId: userId,
