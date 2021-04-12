@@ -62,7 +62,7 @@ const newsStyles = css`
 `;
 
 const scoresStyles = css`
-  color: ${lightGray};
+  color: ${ourGray};
   text-decoration: none;
   font-size: 0.82rem;
   font-weight: 700;
@@ -159,46 +159,46 @@ export default function Home(props) {
               <Carousel responsive={responsive} ssr={true} infinite={false}>
                 {props.scoresArray.map((scores) => (
                   <li key={scores}>
-                    <Link href={`/${scores.gameId}`}>
-                      <a>
-                        {/* <Image
+                    {/* <Link href={`/${scores.gameId}`}>
+                      <a> */}
+                    {/* <Image
                           src={scores.urlToImage}
                           alt="Image"
                           width={100}
                           height={100}
                         /> */}
-                        <br />
-                        <Image
-                          src={`/${scores.vTeam.triCode}.png`}
-                          alt="Image"
-                          width={25}
-                          height={25}
-                        />
-                        {'  '}
-                        {'  '}
-                        {scores.vTeam.triCode}
-                        {'  '}
-                        {'  '}
-                        {'  '}
-                        {scores.vTeam.score}
-                        <br />
-                        <br />
-                        <Image
-                          src={`/${scores.hTeam.triCode}.png`}
-                          alt="Image"
-                          width={25}
-                          height={25}
-                        />
-                        {'  '}
-                        {'  '}
-                        {'  '}
-                        {scores.hTeam.triCode}
-                        {'  '}
-                        {'  '}
-                        {'  '}
-                        {scores.hTeam.score}
-                      </a>
-                    </Link>
+                    <br />
+                    <Image
+                      src={`/${scores.vTeam.triCode}.png`}
+                      alt="Image"
+                      width={25}
+                      height={25}
+                    />
+                    {'  '}
+                    {'  '}
+                    {scores.vTeam.triCode}
+                    {'  '}
+                    {'  '}
+                    {'  '}
+                    {scores.vTeam.score}
+                    <br />
+                    <br />
+                    <Image
+                      src={`/${scores.hTeam.triCode}.png`}
+                      alt="Image"
+                      width={25}
+                      height={25}
+                    />
+                    {'  '}
+                    {'  '}
+                    {'  '}
+                    {scores.hTeam.triCode}
+                    {'  '}
+                    {'  '}
+                    {'  '}
+                    {scores.hTeam.score}
+                    {/* </a>
+                    </Link> */}
                   </li>
                 ))}
               </Carousel>

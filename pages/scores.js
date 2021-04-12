@@ -113,7 +113,7 @@ export default function Scores(props) {
               const newDate = e.target.value;
               const newDateWithoutDashes = newDate.replace(/-/g, '');
               setDateCookieClientSide(newDateWithoutDashes);
-              // localStorage.setItem('gamedate', `${newDateWithoutDashes}`);
+              console.log(newDateWithoutDashes);
 
               const options = {
                 method: 'GET',

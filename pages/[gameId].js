@@ -45,7 +45,7 @@ export default function BoxScore(props) {
   const gameId = props.gameId;
 
   useEffect(() => {
-    // console.log(gameDate);
+    console.log(gameDate);
 
     const options = {
       method: 'GET',
