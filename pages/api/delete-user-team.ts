@@ -1,22 +1,20 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { doesCsrfTokenMatchSessionToken } from '../../util/auth';
-import { deleteUserTeamPair } from '../../util/database';
+import { deleteUserTeamPair, getUserIdByToken } from '../../util/database';
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const { userIdNr, teamIdNr, csrfToken } = req.body;
-  const sessionToken = req.cookies.session;
+  const userIdNr = await getUserIdByToken(req.cookies.session);
+  // console.log(userIdNr);
 
-  if (!doesCsrfTokenMatchSessionToken(csrfToken, sessionToken)) {
-    return res.status(401).send({
-      errors: [{ message: 'CSRF Token does not match' }],
-      user: null,
-    });
+  if (!userIdNr) {
+    return res.status(401).send({ message: 'You are unauthorized to do this' });
   }
 
-  const userId = Number(userIdNr);
+  const teamIdNr = req.body.teamIdNr;
+
+  const userId = userIdNr.userId;
   const teamId = Number(teamIdNr);
 
   const userTeamPair = await deleteUserTeamPair(userId, teamId);

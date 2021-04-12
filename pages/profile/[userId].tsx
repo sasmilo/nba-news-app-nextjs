@@ -61,7 +61,7 @@ type Props =
       user: User;
       teams: Teams[];
       favoriteTeams: FavoriteTeams[];
-      csrfToken: string;
+
     }
   | {
       user: null;
@@ -144,9 +144,9 @@ export default function Profile(props: Props) {
                       'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                      userIdNr,
+
                       teamIdNr,
-                      csrfToken: props.csrfToken,
+
                     }),
                   });
 
@@ -184,9 +184,9 @@ export default function Profile(props: Props) {
                         'Content-Type': 'application/json',
                       },
                       body: JSON.stringify({
-                        userIdNr,
+
                         teamIdNr,
-                        csrfToken: props.csrfToken,
+
                       }),
                     });
 
@@ -207,9 +207,9 @@ export default function Profile(props: Props) {
                         'Content-Type': 'application/json',
                       },
                       body: JSON.stringify({
-                        userIdNr,
+
                         teamIdNr,
-                        csrfToken: props.csrfToken,
+
                       }),
                     });
 
@@ -248,7 +248,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     '../../util/database'
   );
 
-  const { createCsrfToken } = await import('../../util/auth');
+
 
   const session = await getSessionByToken(context.req.cookies.session);
 
@@ -261,7 +261,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  const csrfToken = createCsrfToken(session.token);
+
 
   const user = await getUserById(context.query.userId);
 
@@ -274,7 +274,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       user: user,
       teams: teams,
       favoriteTeams: favoriteTeams,
-      csrfToken: csrfToken,
+
     },
   };
 }

@@ -118,7 +118,6 @@ export default function TeamsPage(props: Props) {
     );
   }
 
-  const userIdNr = props.user.userId;
   const usersTeams = props.favoriteTeams;
 
   // console.log(typeof allTeams);
@@ -159,9 +158,7 @@ export default function TeamsPage(props: Props) {
                       'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-                      userIdNr,
                       teamIdNr,
-                      csrfToken: props.csrfToken,
                     }),
                   });
 
@@ -193,9 +190,7 @@ export default function TeamsPage(props: Props) {
                         'Content-Type': 'application/json',
                       },
                       body: JSON.stringify({
-                        userIdNr,
                         teamIdNr,
-                        csrfToken: props.csrfToken,
                       }),
                     });
 
@@ -216,9 +211,7 @@ export default function TeamsPage(props: Props) {
                         'Content-Type': 'application/json',
                       },
                       body: JSON.stringify({
-                        userIdNr,
                         teamIdNr,
-                        csrfToken: props.csrfToken,
                       }),
                     });
 
@@ -256,8 +249,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     '../../util/database'
   );
 
-  const { createCsrfToken } = await import('../../util/auth');
-
   const session = await getSessionByToken(context.req.cookies.session);
 
   // console.log(session);
@@ -275,8 +266,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-  const csrfToken = createCsrfToken(session.token);
-
   const user = userByToken;
   // console.log(user);
   const userId = user.userId;
@@ -290,7 +279,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       userId: userId,
       teams: teams,
       favoriteTeams: favoriteTeams,
-      csrfToken: csrfToken,
     },
   };
 }
