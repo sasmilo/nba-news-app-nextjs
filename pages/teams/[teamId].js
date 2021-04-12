@@ -93,7 +93,7 @@ export async function getServerSideProps(context) {
 
   const userByToken = await getUserByToken(session);
 
-  const { getTeamInfoFromApi } = await import('../teamdata');
+  const { getTeamInfoFromApi } = await import('../../components/teamdata');
 
   // console.log(context);
   const teamId = String(context.query.teamId);
