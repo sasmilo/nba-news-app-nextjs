@@ -1,4 +1,4 @@
-export async function getTeamInfoFromApi(teamTricode) {
+export default async function getTeamInfoFromApi(teamTricode) {
   const axios = require('axios').default;
 
   const options = {
