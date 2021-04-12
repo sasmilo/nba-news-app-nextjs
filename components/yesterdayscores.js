@@ -5,7 +5,7 @@ export default async function GetLastNightScores() {
     .toISOString()
     .slice(0, 10);
 
-  const yesterdayWithoutDashes = yesterday.replaceAll('-', '');
+  const yesterdayWithoutDashes = yesterday.replace(/-/g, '');
 
   const options = {
     method: 'GET',
