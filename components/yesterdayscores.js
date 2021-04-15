@@ -9,7 +9,7 @@ export default async function GetLastNightScores() {
 
   const options = {
     method: 'GET',
-    url: `http://data.nba.net/10s/prod/v1/${yesterdayWithoutDashes}/scoreboard.json`,
+    url: `https://data.nba.net/10s/prod/v1/${yesterdayWithoutDashes}/scoreboard.json`,
     params: {},
     headers: {},
   };

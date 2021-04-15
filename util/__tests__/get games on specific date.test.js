@@ -5,7 +5,7 @@ const newDateWithoutDashes = '20210404';
 test('get scores for selected date', () => {
   const options = {
     method: 'GET',
-    url: `http://data.nba.net/10s/prod/v2/${newDateWithoutDashes}/scoreboard.json`,
+    url: `https://data.nba.net/10s/prod/v2/${newDateWithoutDashes}/scoreboard.json`,
     params: {},
     headers: {},
   };
