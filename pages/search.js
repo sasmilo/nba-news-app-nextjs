@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import getGeneralNewsFromLastTwoDays from '../components/news';
-import getPersonalizedNewsFromLastTwoDays from '../components/personalizednews';
+import getSpecialNewsFromLastTwoDays from '../components/personalizednews';
 import GetLastNightScores from '../components/yesterdayscores';
 
 const ourGray = '#1d2d35';
@@ -152,6 +152,7 @@ export async function getServerSideProps(context) {
 
   if (!session || session.userId !== user.userId || user === 'undefined') {
     const newsArray = await getGeneralNewsFromLastTwoDays();
+
     return {
       props: {
         newsArray: newsArray || [],
@@ -166,7 +167,7 @@ export async function getServerSideProps(context) {
     const favTeamsInOneString = favTeams.join();
     const queryString = favTeamsInOneString.replace(',', ' ');
 
-    const newsArray = await getPersonalizedNewsFromLastTwoDays(queryString);
+    const newsArray = await getSpecialNewsFromLastTwoDays(queryString);
 
     return {
       props: {

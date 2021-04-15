@@ -20,6 +20,10 @@ export default function Logout(props: Props) {
   useEffect(() => {
     props.setIsSessionStateStale(true);
   }, [props]);
+
+  setTimeout(function () {
+    window.location.href = '/';
+  }, 1000);
   return (
     <>
       <Head>

@@ -4,7 +4,13 @@ export default async function getSpecialNewsFromLastTwoDays(favTeams) {
   const options = {
     method: 'GET',
     url: 'https://free-news.p.rapidapi.com/v1/search',
-    params: { q: `${favTeams}`, lang: 'en' },
+    params: {
+      q: `${favTeams}`,
+      lang: 'en',
+      sources:
+        'nba.com, espn.com, bleacherreport.com, foxsports.com, hoopshype.com, realgm.com, sports.yahoo.com',
+      page_size: 70,
+    },
     headers: {
       'x-rapidapi-key': '1059d1e8fcmshfbea3f707e923ffp11cf21jsnf22363d410bc',
       'x-rapidapi-host': 'free-news.p.rapidapi.com',

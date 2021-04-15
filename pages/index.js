@@ -5,8 +5,9 @@ import Link from 'next/link';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import getGeneralNewsFromLastTwoDays from '../components/news';
-import getPersonalizedNewsFromLastTwoDays from '../components/personalizednews';
+import getSpecialNewsFromLastTwoDays from '../components/personalizednews';
 import getLastNightScores from '../components/yesterdayscores';
+import { setDateCookieClientSide } from '../util/cookies';
 
 const ourGray = '#1d2d35';
 const lightGray = '#E9E4E4';
@@ -116,6 +117,17 @@ const newsTextStyles = css`
 `;
 
 export default function Home(props) {
+  const newsArray = props.newsArray;
+
+  const yesterday = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24)
+    .toISOString()
+    .slice(0, 10);
+
+  const yesterdayWithoutDashes = yesterday.replace(/-/g, '');
+
+  // const [day, setDay] = useState(yesterdayWithoutDashes);
+  setDateCookieClientSide(yesterdayWithoutDashes);
+
   // console.log(props.newsArray);
   // getLastNightScores();
   // console.log(props.scoresArray[0].vTeam.triCode);
@@ -159,46 +171,40 @@ export default function Home(props) {
               <Carousel responsive={responsive} ssr={true} infinite={false}>
                 {props.scoresArray.map((scores) => (
                   <li key={scores}>
-                    {/* <Link href={`/${scores.gameId}`}>
-                      <a> */}
-                    {/* <Image
-                          src={scores.urlToImage}
+                    <Link href={`/${scores.gameId}`}>
+                      <a>
+                        <br />
+                        <Image
+                          src={`/${scores.vTeam.triCode}.png`}
                           alt="Image"
-                          width={100}
-                          height={100}
-                        /> */}
-                    <br />
-                    <Image
-                      src={`/${scores.vTeam.triCode}.png`}
-                      alt="Image"
-                      width={25}
-                      height={25}
-                    />
-                    {'  '}
-                    {'  '}
-                    {scores.vTeam.triCode}
-                    {'  '}
-                    {'  '}
-                    {'  '}
-                    {scores.vTeam.score}
-                    <br />
-                    <br />
-                    <Image
-                      src={`/${scores.hTeam.triCode}.png`}
-                      alt="Image"
-                      width={25}
-                      height={25}
-                    />
-                    {'  '}
-                    {'  '}
-                    {'  '}
-                    {scores.hTeam.triCode}
-                    {'  '}
-                    {'  '}
-                    {'  '}
-                    {scores.hTeam.score}
-                    {/* </a>
-                    </Link> */}
+                          width={25}
+                          height={25}
+                        />
+                        {'  '}
+                        {'  '}
+                        {scores.vTeam.triCode}
+                        {'  '}
+                        {'  '}
+                        {'  '}
+                        {scores.vTeam.score}
+                        <br />
+                        <br />
+                        <Image
+                          src={`/${scores.hTeam.triCode}.png`}
+                          alt="Image"
+                          width={25}
+                          height={25}
+                        />
+                        {'  '}
+                        {'  '}
+                        {'  '}
+                        {scores.hTeam.triCode}
+                        {'  '}
+                        {'  '}
+                        {'  '}
+                        {scores.hTeam.score}
+                      </a>
+                    </Link>
                   </li>
                 ))}
               </Carousel>
@@ -208,7 +214,7 @@ export default function Home(props) {
 
         <div css={newsStyles}>
           <ul>
-            {props.newsArray.map((news) => (
+            {newsArray.map((news) => (
               <li key={news}>
                 <Link href={news.link}>
                   <a>
@@ -254,6 +260,7 @@ export async function getServerSideProps(context) {
 
   if (!session || session.userId !== user.userId || user === 'undefined') {
     const newsArray = await getGeneralNewsFromLastTwoDays();
+
     return {
       props: {
         newsArray: newsArray || [],
@@ -261,17 +268,17 @@ export async function getServerSideProps(context) {
       },
     };
   } else {
-    // const user = await getUserById(context.query.userId);
     const favoriteTeamsArray = await getUsersFavTeams(user.userId);
+
     // console.log(favoriteTeamsArray);
 
     const favTeams = favoriteTeamsArray.map((team) => team.teamName);
     const favTeamsInOneString = favTeams.join();
     const queryString = favTeamsInOneString.replace(',', ' ');
-    // console.log(queryString);
+
     const userId = user.userId;
 
-    const newsArray = await getPersonalizedNewsFromLastTwoDays(queryString);
+    const newsArray = await getSpecialNewsFromLastTwoDays(queryString);
 
     return {
       props: {

@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
+import getTeamInfoFromApi from '../../components/teamdata';
 
 const paddBott = '20px';
 const ourGray = '#1d2d35';
@@ -13,7 +14,6 @@ const boxscoreHeadingStyles = css`
   justify-content: center;
   padding-bottom: ${paddBott};
   font-size: 0.8em;
-
   a {
     text-decoration: none;
     color: ${ourGray};
@@ -92,8 +92,6 @@ export async function getServerSideProps(context) {
   const session = await getSessionByToken(context.req.cookies.session);
 
   const userByToken = await getUserByToken(session);
-
-  const { getTeamInfoFromApi } = await import('../../components/teamdata');
 
   // console.log(context);
   const teamId = String(context.query.teamId);

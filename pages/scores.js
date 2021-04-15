@@ -69,7 +69,17 @@ const paragraphStyles = css`
 export default function Scores(props) {
   const [scores, setScores] = useState(props.yestScoresArray);
 
-  // console.log(scores);
+  const yesterday = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24)
+    .toISOString()
+    .slice(0, 10);
+
+  const yesterdayWithoutDashes = yesterday.replace(/-/g, '');
+
+  const [date, setDate] = useState(yesterdayWithoutDashes);
+
+  setDateCookieClientSide(date);
+
+  console.log(scores);
 
   const responsive = {
     superLargeDesktop: {
@@ -112,8 +122,7 @@ export default function Scores(props) {
             onChange={(e) => {
               const newDate = e.target.value;
               const newDateWithoutDashes = newDate.replace(/-/g, '');
-              setDateCookieClientSide(newDateWithoutDashes);
-              console.log(newDateWithoutDashes);
+              setDate(newDateWithoutDashes);
 
               const options = {
                 method: 'GET',
@@ -126,6 +135,7 @@ export default function Scores(props) {
                 .then(function (response) {
                   const scoresArray = response.data.games;
                   // console.log(scoresArray);
+
                   return setScores(scoresArray);
                 })
                 .catch(function (error) {
