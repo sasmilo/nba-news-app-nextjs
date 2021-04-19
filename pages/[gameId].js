@@ -36,6 +36,13 @@ const teamsStyles = css`
   }
 `;
 
+const loaderStyles = css`
+  text-align: center;
+  font-size: 0.8em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`;
+
 export default function BoxScore(props) {
   const [boxscore, setBoxscore] = useState(null);
 
@@ -68,7 +75,13 @@ export default function BoxScore(props) {
 
   // this is not error, bcs sometimes the answer from api comes late, and in meantime we show this conditional render
   // eslint-disable-next-line
-  if (!boxscore) return <div>Searching for the stats...</div>;
+  if (!boxscore)
+    return (
+      <div css={loaderStyles}>
+        <Image src="/Loader.gif" alt="Image" width={100} height={100} />
+        <p>Searching for the stats...</p>
+      </div>
+    );
 
   return (
     <>
