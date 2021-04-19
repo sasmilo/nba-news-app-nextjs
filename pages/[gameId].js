@@ -47,13 +47,10 @@ export default function BoxScore(props) {
   const [boxscore, setBoxscore] = useState(null);
 
   const gameDate = props.gameDate;
-  // console.log(gameDate);
 
   const gameId = props.gameId;
 
   useEffect(() => {
-    console.log(gameDate);
-
     const options = {
       method: 'GET',
       url: `https://data.nba.net/10s/prod/v1/${gameDate}/${gameId}_mini_boxscore.json`,
@@ -63,9 +60,8 @@ export default function BoxScore(props) {
     axios
       .request(options)
       .then(function (response) {
-        // console.log(response.data);
         const boxscoreObject = response.data.basicGameData;
-        // console.log(boxscoreObject);
+
         return setBoxscore(boxscoreObject);
       })
       .catch(function (error) {
@@ -138,10 +134,10 @@ export default function BoxScore(props) {
 }
 
 export async function getServerSideProps(context) {
-  // console.log(context);
+
   const gameId = String(context.query.gameId);
   const gameDate = String(context.req.cookies.gamedate);
-  // console.log(gameDate);
+
   return {
     props: {
       gameId: gameId,

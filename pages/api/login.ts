@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import {
   doesCsrfTokenMatchSessionToken,
-  doesPasswordMatchPasswordHash,
+  doesPasswordMatchPasswordHash
 } from '../../util/auth';
 import { serializeSecureCookieServerSide } from '../../util/cookies';
 import {
   createSessionByUserId,
-  getUserWithHashedPasswordByUsername,
+  getUserWithHashedPasswordByUsername
 } from '../../util/database';
 
 export default async function handler(
@@ -26,7 +26,6 @@ export default async function handler(
   const userWithPasswordHash = await getUserWithHashedPasswordByUsername(
     username,
   );
-  // console.log(userWithPasswordHash);
 
   // Error out if the username does not exist
   if (!userWithPasswordHash) {
@@ -37,7 +36,6 @@ export default async function handler(
   }
 
   const { passwordHash, ...user } = userWithPasswordHash;
-  // console.log(user);
 
   const passwordMatches = await doesPasswordMatchPasswordHash(
     password,
@@ -54,7 +52,7 @@ export default async function handler(
 
   // At this point, we are successfully authenticated
   const session = await createSessionByUserId(user.userId);
-  // console.log(session);
+
 
   const sessionCookie = serializeSecureCookieServerSide(
     'session',

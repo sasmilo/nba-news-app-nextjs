@@ -127,8 +127,7 @@ const loginStyles = css`
 
 export default function Layout(props) {
   const userId = props.children.props.userId;
-  // console.log(props);
-  // console.log(userId);
+
 
   return (
     <>

@@ -125,12 +125,10 @@ export default function Home(props) {
 
   const yesterdayWithoutDashes = yesterday.replace(/-/g, '');
 
-  // const [day, setDay] = useState(yesterdayWithoutDashes);
+
   setDateCookieClientSide(yesterdayWithoutDashes);
 
-  // console.log(props.newsArray);
-  // getLastNightScores();
-  // console.log(props.scoresArray[0].vTeam.triCode);
+
 
   const responsive = {
     superLargeDesktop: {
@@ -164,7 +162,6 @@ export default function Home(props) {
       </Head>
 
       <main>
-        {/* <h1>Welcome to the NBA News home page!</h1> */}
         <div>
           <div css={scoresStyles}>
             <ul>
@@ -270,7 +267,6 @@ export async function getServerSideProps(context) {
   } else {
     const favoriteTeamsArray = await getUsersFavTeams(user.userId);
 
-    // console.log(favoriteTeamsArray);
 
     const favTeams = favoriteTeamsArray.map((team) => team.teamName);
     const favTeamsInOneString = favTeams.join();

@@ -79,8 +79,6 @@ export default function Scores(props) {
 
   setDateCookieClientSide(date);
 
-  console.log(scores);
-
   const responsive = {
     superLargeDesktop: {
       // the naming can be any, depends on you.
@@ -134,7 +132,6 @@ export default function Scores(props) {
                 .request(options)
                 .then(function (response) {
                   const scoresArray = response.data.games;
-                  // console.log(scoresArray);
 
                   return setScores(scoresArray);
                 })
@@ -152,10 +149,7 @@ export default function Scores(props) {
                 <li key={game.gameId}>
                   <Link href={`/${game.gameId}`}>
                     <a>
-                      {/* <br />
-                      {'  '}
-                      {'  '}
-                      {game.gameId} */}
+
                       <br />
                       <Image
                         src={`/${game.vTeam.triCode}.png`}

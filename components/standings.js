@@ -10,7 +10,6 @@ export default async function getStandings() {
   const standingsArray = await axios
     .request(options)
     .then(function (response) {
-      // console.log(response.data);
       const standArray = response.data;
       return standArray;
     })

@@ -120,11 +120,6 @@ export default function TeamsPage(props: Props) {
 
   const usersTeams = props.favoriteTeams;
 
-  // console.log(typeof allTeams);
-  // console.log(allTeams);
-
-  // console.log(usersTeams);
-
   return (
     <>
       <Head>
@@ -251,10 +246,8 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 
   const session = await getSessionByToken(context.req.cookies.session);
 
-  // console.log(session);
   const teams = await getTeams();
   const userByToken = await getUserByToken(session);
-  // console.log(userByToken);
 
   if (!session || session.userId !== userByToken.userId) {
     return {
@@ -267,11 +260,10 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   }
 
   const user = userByToken;
-  // console.log(user);
+
   const userId = user.userId;
 
   const favoriteTeams = await getUsersFavTeams(user.userId);
-  // console.log(favoriteTeams);
 
   return {
     props: {

@@ -93,15 +93,14 @@ export async function getServerSideProps(context) {
 
   const userByToken = await getUserByToken(session);
 
-  // console.log(context);
+
   const teamId = String(context.query.teamId);
   const teamMark = await getTeamById(teamId);
 
   const teamTricode = teamMark.nbaTricode;
 
   const teamObject = await getTeamInfoFromApi(teamTricode);
-  // console.log(teamObject);
-  // console.log(teamObject.web.homepage);
+
 
   const teamName = teamObject.ttsName;
   const primaryColor = teamObject.primaryColor;
@@ -111,7 +110,7 @@ export async function getServerSideProps(context) {
   const teamWebpage = teamObject.web.homepage;
   const teamTickets = teamObject.web.tickets;
 
-  // console.log(gameDate);
+
 
   if (!session || session.userId !== userByToken.userId) {
     return {

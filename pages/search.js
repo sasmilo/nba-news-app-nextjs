@@ -66,12 +66,9 @@ const newsFieldStyles = css`
 
 export default function SearchPage(props) {
   const allNews = props.newsArray;
-  // const queryString = window.location.search;
-  // console.log(queryString);
-  // const searchString = queryString.replace('?', '');
-  // console.log(search);
+
   const searchString = props.searchString;
-  // console.log(searchString);
+
 
   const filteredNews = allNews.filter(function (currentElement) {
     // the current value is an object, so you can check on its properties

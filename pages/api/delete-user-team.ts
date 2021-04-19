@@ -6,7 +6,7 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   const userIdNr = await getUserIdByToken(req.cookies.session);
-  // console.log(userIdNr);
+
 
   if (!userIdNr) {
     return res.status(401).send({ message: 'You are unauthorized to do this' });
@@ -19,7 +19,7 @@ export default async function handler(
 
   const userTeamPair = await deleteUserTeamPair(userId, teamId);
 
-  // console.log(userTeamPair);
+
 
   res.send({
     userTeamPair: userTeamPair,

@@ -46,7 +46,7 @@ const headingStandingsStyles = css`
 `;
 
 export default function Standings(props) {
-  // console.log(props.newsArray);
+
   getStandings();
   return (
     <>

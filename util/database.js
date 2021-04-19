@@ -74,7 +74,7 @@ export async function getUserByToken(sessionToken) {
     WHERE
       token = ${sessionToken.token}
   `;
-  // console.log(sessions);
+
 
   return camelcaseRecords(sessions)[0];
 }
@@ -92,7 +92,7 @@ export async function getUserIdByToken(sessionToken) {
     WHERE
       token = ${sessionToken}
   `;
-  // console.log(sessions);
+
 
   return camelcaseRecords(sessions)[0];
 }
@@ -244,7 +244,7 @@ export async function getUsersFavTeams(userId) {
     WHERE
       user_id = ${userId}
   `;
-  // console.log(userFavTeams);
+
   return camelcaseRecords(userFavTeams);
 }
 
@@ -290,6 +290,6 @@ export async function getFavTeamsNamesByUserId(userId) {
     WHERE
       user_id = ${userId}
   `;
-  // console.log(userFavTeams);
+
   return camelcaseRecords(userFavTeams);
 }

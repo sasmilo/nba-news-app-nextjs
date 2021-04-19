@@ -61,7 +61,6 @@ type Props =
       user: User;
       teams: Teams[];
       favoriteTeams: FavoriteTeams[];
-
     }
   | {
       user: null;
@@ -144,22 +143,15 @@ export default function Profile(props: Props) {
                       'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({
-
                       teamIdNr,
-
                     }),
                   });
 
                   const { userTeamPair } = await response.json();
                   console.log(userTeamPair);
 
-                  // const restOfFavTeams = usersTeams.filter(
-                  //   (obj) => obj.teamId !== userTeamPair.teamId,
-                  // );
                   // eslint-disable-next-line
                   location.reload(false);
-                  // setUsersTeams(userTeamPair);
-                  // console.log(userTeamPair);
                 }}
               >
                 Remove
@@ -184,9 +176,7 @@ export default function Profile(props: Props) {
                         'Content-Type': 'application/json',
                       },
                       body: JSON.stringify({
-
                         teamIdNr,
-
                       }),
                     });
 
@@ -207,9 +197,7 @@ export default function Profile(props: Props) {
                         'Content-Type': 'application/json',
                       },
                       body: JSON.stringify({
-
                         teamIdNr,
-
                       }),
                     });
 
@@ -248,8 +236,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     '../../util/database'
   );
 
-
-
   const session = await getSessionByToken(context.req.cookies.session);
 
   if (!session || session.userId !== Number(context.query.userId)) {
@@ -261,20 +247,16 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     };
   }
 
-
-
   const user = await getUserById(context.query.userId);
 
   const teams = await getTeams();
   const favoriteTeams = await getUsersFavTeams(user.userId);
-  // console.log(favoriteTeams);
 
   return {
     props: {
       user: user,
       teams: teams,
       favoriteTeams: favoriteTeams,
-
     },
   };
 }

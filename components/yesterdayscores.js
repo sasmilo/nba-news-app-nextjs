@@ -16,7 +16,6 @@ export default async function GetLastNightScores() {
   const scoresArray = await axios
     .request(options)
     .then(function (response) {
-      // console.log(response.data.games);
       const scArray = response.data.games;
       return scArray;
     })
