@@ -16,6 +16,7 @@ module.exports = {
       'cdn.nba.com',
       's.yimg.com',
       'images.daznservices.com',
+      'ak-static.cms.nba.com',
     ],
   },
 };

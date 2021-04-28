@@ -118,17 +118,13 @@ const newsTextStyles = css`
 
 export default function Home(props) {
   const newsArray = props.newsArray;
-
   const yesterday = new Date(new Date().valueOf() - 1000 * 60 * 60 * 24)
     .toISOString()
     .slice(0, 10);
 
   const yesterdayWithoutDashes = yesterday.replace(/-/g, '');
 
-
   setDateCookieClientSide(yesterdayWithoutDashes);
-
-
 
   const responsive = {
     superLargeDesktop: {
@@ -212,7 +208,11 @@ export default function Home(props) {
         <div css={newsStyles}>
           <ul>
             {newsArray.map((news) => (
-              <li key={news}>
+              // It is better to use as key one of the
+              // object properties that has unique
+              // character. Hence we used _id prop,
+              // which was pre-defined by API provider.
+              <li key={news._id}>
                 <Link href={news.link}>
                   <a>
                     <div css={newsFieldStyles}>
@@ -266,7 +266,6 @@ export async function getServerSideProps(context) {
     };
   } else {
     const favoriteTeamsArray = await getUsersFavTeams(user.userId);
-
 
     const favTeams = favoriteTeamsArray.map((team) => team.teamName);
     const favTeamsInOneString = favTeams.join();
