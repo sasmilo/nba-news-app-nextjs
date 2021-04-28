@@ -1,9 +1,5 @@
 export default async function getGeneralNewsFromLastTwoDays() {
-
-
   const axios = require('axios').default;
-
-
 
   const options = {
     method: 'GET',
@@ -12,7 +8,7 @@ export default async function getGeneralNewsFromLastTwoDays() {
       q: 'nba news',
       lang: 'en',
       sources:
-        'nba.com, espn.com, bleacherreport.com, foxsports.com, hoopshype.com, realgm.com, sports.yahoo.com',
+        'nba.com, espn.com, bleacherreport.com, foxsports.com, hoopshype.com, realgm.com, sports.yahoo.com, nbadraft.net, prosportsdaily.com',
       page_size: 70,
     },
     headers: {
@@ -21,12 +17,9 @@ export default async function getGeneralNewsFromLastTwoDays() {
     },
   };
 
-
-
   const newsDataArray = await axios
     .request(options)
     .then(function (response) {
-
       const newsArray = response.data.articles;
 
       return newsArray;

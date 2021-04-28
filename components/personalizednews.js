@@ -8,7 +8,7 @@ export default async function getSpecialNewsFromLastTwoDays(favTeams) {
       q: `${favTeams}`,
       lang: 'en',
       sources:
-        'nba.com, espn.com, bleacherreport.com, foxsports.com, hoopshype.com, realgm.com, sports.yahoo.com',
+        'nba.com, espn.com, bleacherreport.com, foxsports.com, hoopshype.com, realgm.com, sports.yahoo.com, nbadraft.net, prosportsdaily.com',
       page_size: 70,
     },
     headers: {
