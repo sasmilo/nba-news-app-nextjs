@@ -46,7 +46,6 @@ const headingStandingsStyles = css`
 `;
 
 export default function Standings(props) {
-
   getStandings();
   return (
     <>
@@ -63,7 +62,7 @@ export default function Standings(props) {
             <ul>
               {props.standingsArray.league.standard.conference.east.map(
                 (team) => (
-                  <li key={team}>
+                  <li key={team.teamId}>
                     <p>
                       <Image
                         src={`/${team.teamSitesOnly.teamTricode}.png`}
@@ -102,7 +101,7 @@ export default function Standings(props) {
             <ul>
               {props.standingsArray.league.standard.conference.west.map(
                 (team) => (
-                  <li key={team}>
+                  <li key={team.teamId}>
                     <p>
                       <Image
                         src={`/${team.teamSitesOnly.teamTricode}.png`}

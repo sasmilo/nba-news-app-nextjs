@@ -146,10 +146,13 @@ export default function Scores(props) {
           <ul>
             <Carousel responsive={responsive} ssr={true} infinite={false}>
               {scores.map((game) => (
-                <li key={game.gameId}>
+                // Here we use div instead of li tag
+                // because Carousel adds another li tag
+                // by itself. If we set this tag to li,
+                // it would cause the conflict.
+                <div key={game.gameId}>
                   <Link href={`/${game.gameId}`}>
                     <a>
-
                       <br />
                       <Image
                         src={`/${game.vTeam.triCode}.png`}
@@ -182,7 +185,7 @@ export default function Scores(props) {
                       {game.hTeam.score}
                     </a>
                   </Link>
-                </li>
+                </div>
               ))}
             </Carousel>
           </ul>

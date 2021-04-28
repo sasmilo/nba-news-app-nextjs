@@ -163,7 +163,11 @@ export default function Home(props) {
             <ul>
               <Carousel responsive={responsive} ssr={true} infinite={false}>
                 {props.scoresArray.map((scores) => (
-                  <li key={scores}>
+                  // Here we use div instead of li tag
+                  // because Carousel adds another li tag
+                  // by itself. If we set this tag to li,
+                  // it would cause the conflict.
+                  <div key={scores}>
                     <Link href={`/${scores.gameId}`}>
                       <a>
                         <br />
@@ -198,7 +202,7 @@ export default function Home(props) {
                         {scores.hTeam.score}
                       </a>
                     </Link>
-                  </li>
+                  </div>
                 ))}
               </Carousel>
             </ul>

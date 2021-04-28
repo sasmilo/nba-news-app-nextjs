@@ -69,7 +69,6 @@ export default function SearchPage(props) {
 
   const searchString = props.searchString;
 
-
   const filteredNews = allNews.filter(function (currentElement) {
     // the current value is an object, so you can check on its properties
     return Object.values(currentElement).some((value) => {
@@ -100,11 +99,14 @@ export default function SearchPage(props) {
       </Head>
 
       <main>
-        {/* <h1>Welcome to the NBA News home page!</h1> */}
         <div css={newsStyles}>
           <ul>
             {filteredNews.map((news) => (
-              <li key={news}>
+              // It is better to use as key one of the
+              // object properties that has unique
+              // character. Hence we used _id prop,
+              // which was pre-defined by API provider.
+              <li key={news._id}>
                 <Link href={news.link}>
                   <a>
                     <div css={newsFieldStyles}>
