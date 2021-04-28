@@ -167,7 +167,7 @@ export default function Home(props) {
                   // because Carousel adds another li tag
                   // by itself. If we set this tag to li,
                   // it would cause the conflict.
-                  <div key={scores}>
+                  <div key={scores.gameId}>
                     <Link href={`/${scores.gameId}`}>
                       <a>
                         <br />

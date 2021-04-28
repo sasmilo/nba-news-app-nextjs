@@ -17,7 +17,7 @@ const standingsStyles = css`
     padding: 20px;
   }
 
-  p {
+  li {
     background-color: ${ourGray};
     color: ${lightGray};
     text-align: center;
@@ -63,34 +63,32 @@ export default function Standings(props) {
               {props.standingsArray.league.standard.conference.east.map(
                 (team) => (
                   <li key={team.teamId}>
-                    <p>
-                      <Image
-                        src={`/${team.teamSitesOnly.teamTricode}.png`}
-                        alt="Image"
-                        width={30}
-                        height={30}
-                      />
+                    <Image
+                      src={`/${team.teamSitesOnly.teamTricode}.png`}
+                      alt="Image"
+                      width={30}
+                      height={30}
+                    />
 
-                      <span>
-                        {team.teamSitesOnly.teamKey}
-                        {'  '}
-                        {team.teamSitesOnly.teamNickname}
-                      </span>
+                    <span>
+                      {team.teamSitesOnly.teamKey}
+                      {'  '}
+                      {team.teamSitesOnly.teamNickname}
+                    </span>
 
-                      <span>
-                        {team.win}-{team.loss}
-                      </span>
+                    <span>
+                      {team.win}-{team.loss}
+                    </span>
 
-                      {/* {team.gamesBehind} */}
+                    <span>{team.gamesBehind}</span>
 
-                      <span>{(Number(team.winPct) * 100).toFixed(1)}%</span>
-                      {/* {'  '}
+                    <span>{(Number(team.winPct) * 100).toFixed(1)}%</span>
+                    {/* {'  '}
                       {'  '}
                       {team.lastTenWin}/{team.lastTenLoss}
                       {'  '}
                       {'  '}
                       {team.streak} */}
-                    </p>
                   </li>
                 ),
               )}
@@ -102,32 +100,30 @@ export default function Standings(props) {
               {props.standingsArray.league.standard.conference.west.map(
                 (team) => (
                   <li key={team.teamId}>
-                    <p>
-                      <Image
-                        src={`/${team.teamSitesOnly.teamTricode}.png`}
-                        alt="Image"
-                        width={30}
-                        height={30}
-                      />
-                      <span>
-                        {team.teamSitesOnly.teamKey}
-                        {'  '}
-                        {team.teamSitesOnly.teamNickname}
-                      </span>
-                      <span>
-                        {team.win}-{team.loss}
-                      </span>
-                      {/* {team.gamesBehind}
+                    <Image
+                      src={`/${team.teamSitesOnly.teamTricode}.png`}
+                      alt="Image"
+                      width={30}
+                      height={30}
+                    />
+                    <span>
+                      {team.teamSitesOnly.teamKey}
+                      {'  '}
+                      {team.teamSitesOnly.teamNickname}
+                    </span>
+                    <span>
+                      {team.win}-{team.loss}
+                    </span>
+                    {/* {team.gamesBehind}
                       {'  '}
                       {'  '} */}
-                      <span>{(Number(team.winPct) * 100).toFixed(1)}%</span>
-                      {/* {'  '}
+                    <span>{(Number(team.winPct) * 100).toFixed(1)}%</span>
+                    {/* {'  '}
                       {'  '}
                       {team.lastTenWin}/{team.lastTenLoss}
                       {'  '}
                       {'  '}
                       {team.streak} */}
-                    </p>
                   </li>
                 ),
               )}
