@@ -17,6 +17,7 @@ module.exports = {
       's.yimg.com',
       'images.daznservices.com',
       'ak-static.cms.nba.com',
+      'abc7ny.com',
     ],
   },
 };

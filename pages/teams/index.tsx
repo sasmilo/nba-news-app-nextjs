@@ -159,8 +159,8 @@ export default function TeamsPage(props: Props) {
 
                   const { userTeamPair } = await response.json();
                   console.log(userTeamPair);
-                  // eslint-disable-next-line
-                  location.reload(false);
+
+                  window.location.reload();
                 }}
               >
                 Remove
@@ -191,8 +191,8 @@ export default function TeamsPage(props: Props) {
 
                     const { userTeamPair } = await response.json();
                     console.log(userTeamPair);
-                    // eslint-disable-next-line
-                    location.reload(false);
+
+                    window.location.reload();
                   }}
                 >
                   Add
@@ -212,8 +212,8 @@ export default function TeamsPage(props: Props) {
 
                     const { userTeamPair } = await response.json();
                     console.log(userTeamPair);
-                    // eslint-disable-next-line
-                    location.reload(false);
+
+                    window.location.reload();
                   }}
                 >
                   Remove
